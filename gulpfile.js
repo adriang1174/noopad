@@ -6,6 +6,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     sourcemaps = require('gulp-sourcemaps'),
+    mainBowerFiles = require('main-bower-files'),
 
     input = {
         'html': 'source/*.html',
@@ -32,6 +33,17 @@ gulp.task('build-js', function () {
     return gulp.src(input.javascript)
         .pipe(sourcemaps.init())
         .pipe(concat('app.js'))
+        //only uglify if gulp is ran with '--type production'
+        .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(output.javascript));
+});
+
+/* concat javascript files, minify if --type production */
+gulp.task('build-vendor-js', function () {
+    return gulp.src(mainBowerFiles())
+        .pipe(sourcemaps.init())
+        .pipe(concat('vendor.js'))
         //only uglify if gulp is ran with '--type production'
         .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
         .pipe(sourcemaps.write())
@@ -70,4 +82,4 @@ gulp.task('watch', function () {
 });
 
 /* run the watch task when gulp is called without arguments */
-gulp.task('default', ['jshint', 'build-js', 'build-css', 'copy-css', 'copy-html', 'watch']);
+gulp.task('default', ['jshint', 'build-js', 'build-vendor-js', 'build-css', 'copy-css', 'copy-html', 'watch']);
