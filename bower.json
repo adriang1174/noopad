@@ -1,11 +1,11 @@
 {
-  "name": "nooo",
-  "description": "Knowledge Pad for Dropbox",
-  "version": "0.0.1",
-  "license": "MIT",
-  "private": true,
-  "dependencies": {
-    "angular": "^1.3.13",
-    "html5-boilerplate": "~4.3.0"
-  }
+    "name": "noopad",
+    "description": "Knowledge Pad for Dropbox",
+    "version": "0.0.1",
+    "license": "MIT",
+    "private": true,
+    "dependencies": {
+        "angular": "^1.3.13",
+        "html5-boilerplate": "~4.3.0"
+    }
 }
