@@ -1,4 +1,5 @@
 $background-color: #3b3b3b;
+$logo-color: #bbddab;
 
 
 html,
@@ -6,6 +7,12 @@ body {
     height: 100%; 
 }
 /* wrapper for page content to push down footer */
+
+article {
+    border: 1px dotted;
+    margin: 5px;
+    padding: 15px;
+}
 
 .page-container {
     min-height: 100%;
@@ -56,6 +63,10 @@ a {
 
 .text-center {
     padding-top: 20px;
+}
+
+.navbar-inverse .navbar-brand {
+    color: $logo-color;
 }
 
 #sidebar {

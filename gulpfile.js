@@ -40,6 +40,7 @@ gulp.task('build-js', function () {
 });
 
 /* concat javascript files, minify if --type production */
+/* From http://blog.simontimms.com/2015/01/22/getting-bower-components-in-gulp/ */
 gulp.task('build-vendor-js', function () {
     return gulp.src(mainBowerFiles())
         .pipe(sourcemaps.init())

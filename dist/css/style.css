@@ -4,6 +4,12 @@ body {
 }
 
 /* wrapper for page content to push down footer */
+article {
+  border: 1px dotted;
+  margin: 5px;
+  padding: 15px;
+}
+
 .page-container {
   min-height: 100%;
   height: auto !important;
@@ -51,6 +57,10 @@ a {
 
 .text-center {
   padding-top: 20px;
+}
+
+.navbar-inverse .navbar-brand {
+  color: #bbddab;
 }
 
 #sidebar {
