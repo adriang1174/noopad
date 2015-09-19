@@ -1,6 +1,5 @@
 var gulp = require('gulp'),
     gutil = require('gulp-util'),
-
     jshint = require('gulp-jshint'),
     compass = require('gulp-compass'),
     concat = require('gulp-concat'),

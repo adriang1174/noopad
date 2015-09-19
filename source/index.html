@@ -12,7 +12,7 @@
     <link href="css/main.css" rel="stylesheet">
 </head>
 
-<body ng-controller="AppCtrl">
+<body ng-controller="AppController">
     <div class="page-container">
         <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
@@ -24,22 +24,23 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">noo+pad</a>
-                </div>
+                    <a href="" ng-click="authenticate()">Log in</a>
+                    <a href="" ng-click="getInfo()">info</a>
+                </div>  
             </div>
         </div>
         <div class="container">
             <div class="row row-offcanvas row-offcanvas-left">
                 <!-- sidebar -->
                 <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-                    <div data-spy="affix" data-offset-top="45" data-offset-bottom="90">
+                    <!-- <div data-spy="affix" data-offset-top="45" data-offset-bottom="90"> -->
                         <ul class="nav" id="sidebar-nav">
-                            <li><a href="#">noter</a></li>
-                            <li><a href="#">music</a></li>
+                            <li><a href="#">{{AppController.name}}</a></li>
                             <li><a href="#">ideer</a></li>
                             <li><a href="#">kodeideer</a></li>
                             <li><a href="#"></a></li>
                         </ul>
-                    </div>
+                    <!-- </div> -->
                 </div>
 
                 <!-- main area -->
@@ -48,6 +49,7 @@
                         <h1>{{content.title}}</h1>
                         <p>{{content.body}}</p>
                     </article>
+                    Is logged in: {{isLoggedIn}}
                 </div>
             </div>
         </div>
