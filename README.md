@@ -1,1 +1,1 @@
-An Angular.js app to edit textfiles in Dropbox. Not quite done yet.
+An Angular app to edit textfiles stored in Dropbox. Not quite done yet.
