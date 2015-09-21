@@ -1,8 +1,8 @@
-var app = angular.module('noopad', ['ui.bootstrap', 'dropbox', 'config']);
+var app = angular.module('noopad', ['ui.bootstrap', 'dropbox', 'noopad.config']);
 
-app.config(function(DropboxProvider, config) {
+app.config(function(DropboxProvider, EnvironmentConfig) {
         'use strict';
-        DropboxProvider.config(config.dropboxApiKey, config.baseUrl + 'callback.html');
+        DropboxProvider.config(EnvironmentConfig.dropboxApiKey, EnvironmentConfig.baseUrl + 'callback.html');
     })
     .controller('AppController', function($scope, Dropbox, $window) {
         'use strict';

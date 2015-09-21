@@ -6,12 +6,15 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     sourcemaps = require('gulp-sourcemaps'),
     mainBowerFiles = require('main-bower-files'),
+    gulpNgConfig = require('gulp-ng-config'),
+    print = require('gulp-print'),
 
     input = {
         'html': 'source/*.html',
         'sass': 'source/sass/**/*.scss',
         'javascript': 'source/javascript/**/*.js',
-        'vendor_css': 'bower_components/html5-boilerplate/css/*.css'
+        'vendor_css': 'bower_components/html5-boilerplate/css/*.css',
+        'config': 'config.json'
     },
 
     output = {
@@ -29,7 +32,9 @@ gulp.task('jshint', function () {
 
 /* concat javascript files, minify if --type production */
 gulp.task('build-js', function () {
+    makeConfig();
     return gulp.src(input.javascript)
+        .pipe(print())
         .pipe(sourcemaps.init())
         .pipe(concat('app.js'))
         //only uglify if gulp is ran with '--type production'
@@ -37,6 +42,14 @@ gulp.task('build-js', function () {
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(output.javascript));
 });
+
+function makeConfig () {
+    gulp.src('./config.json')
+        .pipe(gulpNgConfig(input.config, {
+            environment: 'local'
+        }))
+        .pipe(gulp.dest('source/javascript'));
+}
 
 /* concat javascript files, minify if --type production */
 /* From http://blog.simontimms.com/2015/01/22/getting-bower-components-in-gulp/ */
@@ -81,5 +94,6 @@ gulp.task('watch', function () {
     gulp.watch(input.html, ['copy-html']);
 });
 
-/* run the watch task when gulp is called without arguments */
+
+/* Build dist */
 gulp.task('default', ['jshint', 'build-js', 'build-vendor-js', 'build-css', 'copy-css', 'copy-html', 'watch']);
