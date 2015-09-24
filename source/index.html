@@ -14,42 +14,20 @@
 
 <body ng-controller="AppController">
     <div class="page-container">
-        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <!-- Handle data-toggle in angular to reveal/hide .sidebar-nav -->
-                    <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".sidebar-nav">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">noo+pad</a>
-                    <a href="" ng-click="authenticate()">Log in</a>
-                    <a href="" ng-click="getInfo()">info</a>
-                </div>  
-            </div>
-        </div>
         <div class="container">
-            <div class="row row-offcanvas row-offcanvas-left">
-                <!-- sidebar -->
-                <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-                    <!-- <div data-spy="affix" data-offset-top="45" data-offset-bottom="90"> -->
-                        <ul class="nav" id="sidebar-nav">
-                            <li><a href="#">{{AppController.name}}</a></li>
-                            <li><a href="#">ideer</a></li>
-                            <li><a href="#">kodeideer</a></li>
-                            <li><a href="#"></a></li>
-                        </ul>
-                    <!-- </div> -->
-                </div>
-
-                <!-- main area -->
-                <div class="col-xs-12 col-sm-9" data-spy="scroll" data-target="#sidebar-nav">
+            <div class="row"> 
+                    <div ng-if="!displayName">
+                        <a href="" ng-click="authenticate()">Log in</a>
+                    </div>
+                    <div ng-if="displayName">{{displayName}}
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-9">
                     <article>
                         <h1>{{content.title}}</h1>
                         <p>{{content.body}}</p>
                     </article>
-                    Is logged in: {{isLoggedIn}}
                 </div>
             </div>
         </div>
@@ -57,15 +35,6 @@
 
     <script src="js/vendor.js"></script>
     <script src="js/app.js"></script>
-    <!--<script type='text/javascript'>
-    // TODO: Create menubutton in angular, get rid of jquery
-    $(document).ready(function() {
-        $('[data-toggle=offcanvas]').click(function() {
-            $('.row-offcanvas').toggleClass('active');
-        });
-
-    });
-    </script>-->
 </body>
 
 </html>

@@ -14,7 +14,7 @@ var gulp = require('gulp'),
         'sass': 'source/sass/**/*.scss',
         'javascript': 'source/javascript/**/*.js',
         'vendor_css': 'bower_components/html5-boilerplate/css/*.css',
-        'config': 'config.json'
+        'config': 'noopad.config'
     },
 
     output = {
