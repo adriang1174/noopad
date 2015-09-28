@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>noo+pad</title>
+    <title>noopad</title>
     <!-- include the Bootstrap CSS TODO: use bower-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -16,11 +16,20 @@
     <div class="page-container">
         <div class="container">
             <div class="row"> 
-                    <div ng-if="!displayName">
+                <div class="col-xs-12 col-sm-9">
+                    <div ng-if="!userDisplayName">
                         <a href="" ng-click="authenticate()">Log in</a>
                     </div>
-                    <div ng-if="displayName">{{displayName}}
+                    <div ng-if="userDisplayName">{{userDisplayName}}
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-9">
+                    <ul>
+                        <li ng-repeat="file in files"><a href="" ng-click="showFile(file)">{{file}}</a></li>
+                    </ul>
+                </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-9">

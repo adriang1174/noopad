@@ -12,17 +12,28 @@ app.config(function(DropboxProvider, noopadConfig) {
             Dropbox.authenticate().then(function success(credentials) {
                 $window.console.log('Authenticated success');
                 Dropbox.accountInfo().then(function(accountInfo) {
-                    $scope.displayName = accountInfo.display_name;
+                    $scope.userDisplayName = accountInfo.display_name;
+
+                    Dropbox.readdir('/').then(function success(entries) {
+                        $scope.files = entries;
+                    });
+                    
                 });
             }, function error(reason) {
                 $window.console.log('Failed: ' + reason);
             });
         }
 
-        $scope.content = {
-            title: 'Dropbox Account',
-            body: 'body'
-        };
+        function showFile(filename) {
+            Dropbox.readFile(filename).then(function success(fileData) {
+                $scope.content = {
+                    title: filename,
+                    body: fileData
+                };
+            });
+        }
+
         
         $scope.authenticate = login;
+        $scope.showFile = showFile;
     });
