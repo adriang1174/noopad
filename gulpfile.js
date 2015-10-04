@@ -8,6 +8,7 @@ var gulp = require('gulp'),
     mainBowerFiles = require('main-bower-files'),
     gulpNgConfig = require('gulp-ng-config'),
     print = require('gulp-print'),
+    del = require('del'),
 
     input = {
         'html': 'source/*.html',
@@ -18,6 +19,7 @@ var gulp = require('gulp'),
     },
 
     output = {
+        'dist': 'dist',
         'html': 'dist',
         'stylesheets': 'dist/css',
         'javascript': 'dist/js'
@@ -46,7 +48,7 @@ gulp.task('build-js', function () {
 function makeConfig () {
     gulp.src('./config.json')
         .pipe(gulpNgConfig(input.config, {
-            environment: 'local'
+            environment: 'production'
         }))
         .pipe(gulp.dest('source/javascript'));
 }
@@ -94,6 +96,10 @@ gulp.task('watch', function () {
     gulp.watch(input.html, ['copy-html']);
 });
 
+
+gulp.task('clean', function () {
+    del(output.dist + '/**');
+});
 
 /* Build dist */
 gulp.task('default', ['jshint', 'build-js', 'build-vendor-js', 'build-css', 'copy-css', 'copy-html', 'watch']);
