@@ -10,7 +10,6 @@ app.config(function(DropboxProvider, noopadConfig) {
         function login() {
             $window.console.log('doing login');
             Dropbox.authenticate().then(function success(credentials) {
-                $window.console.log('Authenticated success');
                 Dropbox.accountInfo().then(function(accountInfo) {
                     $scope.userDisplayName = accountInfo.display_name;
 
@@ -20,7 +19,7 @@ app.config(function(DropboxProvider, noopadConfig) {
                     
                 });
             }, function error(reason) {
-                $window.console.log('Failed: ' + reason);
+                $window.console.log('Authentication failed with: ' + reason);
             });
         }
 
