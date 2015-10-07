@@ -46,9 +46,10 @@ gulp.task('build-js', function () {
 });
 
 function makeConfig () {
+    var env = gutil.env.type === 'production' ? 'production' : 'localhost';
     gulp.src('./config.json')
         .pipe(gulpNgConfig(input.config, {
-            environment: 'production'
+            environment: env
         }))
         .pipe(gulp.dest('source/javascript'));
 }
@@ -98,7 +99,7 @@ gulp.task('watch', function () {
 
 
 gulp.task('clean', function () {
-    del(output.dist + '/**');
+    del([output.dist, 'source/javascript/config.js']);
 });
 
 /* Build dist */
