@@ -5,16 +5,28 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     sourcemaps = require('gulp-sourcemaps'),
-    mainBowerFiles = require('main-bower-files'),
+    //mainBowerFiles = require('main-bower-files'),
     gulpNgConfig = require('gulp-ng-config'),
     print = require('gulp-print'),
     del = require('del'),
 
     input = {
-        'html': 'source/*.html',
-        'sass': 'source/sass/**/*.scss',
-        'javascript': 'source/javascript/**/*.js',
-        'vendor_css': 'bower_components/html5-boilerplate/css/*.css',
+        'html':         'source/*.html',
+        'sass':         'source/sass/**/*.scss',
+        'javascript':   'source/javascript/**/*.js',
+        'vendor_css':   [
+                            'bower_components/html5-boilerplate/css/*.css',
+                            'bower_components/ng-materialize/dist/ng-materialize.min.css',
+                            'bower_components/waves/dist/waves.min.css'                            
+                        ],
+        'vendor_js':    [
+                            'bower_components/angular/angular.js',
+                            'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+                            'bower_components/ngDropbox/dropbox.js',
+                            'bower_components/ng-materialize/dist/ng-materialize.js',
+                            'bower_components/angular-animate/angular-animate.js',
+                            'bower_components/waves/dist/waves.min.js'
+                        ],
         'config': 'noopad.config'
     },
 
@@ -57,10 +69,11 @@ function makeConfig () {
 /* concat javascript files, minify if --type production */
 /* From http://blog.simontimms.com/2015/01/22/getting-bower-components-in-gulp/ */
 gulp.task('build-vendor-js', function () {
-    return gulp.src(mainBowerFiles())
+    //var bowerFiles = mainBowerFiles();
+    console.log(input.vendor_js);
+    return gulp.src(input.vendor_js)
         .pipe(sourcemaps.init())
         .pipe(concat('vendor.js'))
-        //only uglify if gulp is ran with '--type production'
         .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(output.javascript));
@@ -97,10 +110,11 @@ gulp.task('watch', function () {
     gulp.watch(input.html, ['copy-html']);
 });
 
-
-gulp.task('clean', function () {
+function clean() {
     del([output.dist, 'source/javascript/config.js']);
-});
+}
+
+gulp.task('clean', clean);
 
 /* Build dist */
 gulp.task('default', ['jshint', 'build-js', 'build-vendor-js', 'build-css', 'copy-css', 'copy-html', 'watch']);

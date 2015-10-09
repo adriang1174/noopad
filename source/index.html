@@ -35,8 +35,12 @@
                 <div class="col-xs-12 col-sm-9">
                     <article>
                         <h1>{{content.title}}</h1>
-                        <!-- <p>{{content.body}}</p> -->
-                        <textarea id="contentbody" ng-model="content.body"></textarea>
+                        <textarea
+                              id="example2"
+                              materialize-textarea="true"
+                              floating-label="{{content.title}}"
+                              ng-model="content.body">
+                            </textarea>
                     </article>
                 </div>
             </div>
