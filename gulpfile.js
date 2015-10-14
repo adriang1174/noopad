@@ -15,7 +15,6 @@ var gulp = require('gulp'),
         'sass':         'source/sass/**/*.scss',
         'javascript':   'source/javascript/**/*.js',
         'vendor_css':   [
-                            'bower_components/html5-boilerplate/css/*.css',
                             'bower_components/ng-materialize/dist/ng-materialize.min.css',
                             'bower_components/waves/dist/waves.min.css'                            
                         ],
@@ -94,6 +93,7 @@ gulp.task('build-css', function () {
 /* copy vendor css files */
 gulp.task('copy-css', function () {
     return gulp.src(input.vendor_css)
+        .pipe(concat('vendor.css'))
         .pipe(gulp.dest(output.stylesheets));
 });
 

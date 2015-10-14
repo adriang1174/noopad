@@ -1,4 +1,4 @@
-var app = angular.module('noopad', ['ui.bootstrap', 'dropbox', 'noopad.config', 'ngMaterialize']);
+var app = angular.module('noopad', ['dropbox', 'noopad.config', 'ngMaterialize']);
 
 app.config(function(DropboxProvider, noopadConfig) {
         'use strict';
