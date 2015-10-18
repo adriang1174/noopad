@@ -5,7 +5,6 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     sourcemaps = require('gulp-sourcemaps'),
-    //mainBowerFiles = require('main-bower-files'),
     gulpNgConfig = require('gulp-ng-config'),
     print = require('gulp-print'),
     del = require('del'),
@@ -50,7 +49,6 @@ gulp.task('build-js', function () {
         .pipe(print())
         .pipe(sourcemaps.init())
         .pipe(concat('app.js'))
-        //only uglify if gulp is ran with '--type production'
         .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(output.javascript));
@@ -92,6 +90,7 @@ gulp.task('build-css', function () {
 
 /* copy vendor css files */
 gulp.task('copy-css', function () {
+    console.log(input.vendor_css);
     return gulp.src(input.vendor_css)
         .pipe(concat('vendor.css'))
         .pipe(gulp.dest(output.stylesheets));

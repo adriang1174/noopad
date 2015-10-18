@@ -5,9 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>noopad</title>
-    <!-- include the Bootstrap CSS TODO: use bower-->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet"> <!-- style.scss -->
+    <link href="css/style.css" rel="stylesheet">
     <link href="css/vendor.css" rel="stylesheet">
 </head>
 
@@ -19,15 +17,19 @@
                     <div ng-if="!userDisplayName">
                         <a href="" ng-click="authenticate()">Log in</a>
                     </div>
-                    <div ng-if="userDisplayName">{{userDisplayName}}
+                    <div ng-if="userDisplayName">Hi {{userDisplayName}}. [log out]
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-9">
-                    <ul>
+                    <div dropdown>
+                        <button type="button" dropdown-toggle class="btn btn-default">Files</button>
+                    <ul class="dropdown-menu">
                         <li ng-repeat="file in files"><a href="" ng-click="showFile(file)">{{file}}</a></li>
                     </ul>
+                    </div>
+
                 </div>
             </div>
             <div class="row">
