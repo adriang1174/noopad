@@ -1,6 +1,13 @@
+@import "../../bower_components/bourbon/app/assets/stylesheets/bourbon";
+@import "../../bower_components/neat/app/assets/stylesheets/neat";
+
 $background-color: #3b3b3b;
 $logo-color: #bbddab;
 
+$visual-grid: true;
+$visual-grid-color: red;
+$visual-grid-index: front;
+$visual-grid-opacity: 0.5;
 
 html,
 body {
@@ -12,6 +19,10 @@ article {
    /* border: 1px dotted; */
     margin: 5px;
     padding: 15px;
+}
+
+.left {
+    display: none;
 }
 
 .page-container {
