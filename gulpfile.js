@@ -35,27 +35,25 @@ var gulp = require('gulp'),
         'javascript': 'dist/js'
     };
 
-/* run javascript through jshint */
 gulp.task('jshint', function () {
     return gulp.src(input.javascript)
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'));
 });
 
-/* concat javascript files, minify if --type production */
 gulp.task('build-js', function () {
     makeConfig();
     return gulp.src(input.javascript)
         .pipe(print())
         .pipe(sourcemaps.init())
         .pipe(concat('app.js'))
-        .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
+        //.pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(output.javascript));
 });
 
 function makeConfig () {
-    var env = gutil.env.type === 'production' ? 'production' : 'localhost';
+    var env = (gutil.env.type === 'production' ? 'production' : 'localhost');
     gulp.src('./config.json')
         .pipe(gulpNgConfig(input.config, {
             environment: env
@@ -63,20 +61,15 @@ function makeConfig () {
         .pipe(gulp.dest('source/javascript'));
 }
 
-/* concat javascript files, minify if --type production */
-/* From http://blog.simontimms.com/2015/01/22/getting-bower-components-in-gulp/ */
 gulp.task('build-vendor-js', function () {
-    //var bowerFiles = mainBowerFiles();
-    console.log(input.vendor_js);
     return gulp.src(input.vendor_js)
         .pipe(sourcemaps.init())
         .pipe(concat('vendor.js'))
-        .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
+      //  .pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(output.javascript));
 });
 
-/* compile scss files */
 gulp.task('build-css', function () {
     return gulp.src(input.sass)
         .pipe(sourcemaps.init())
@@ -89,8 +82,7 @@ gulp.task('build-css', function () {
 });
 
 /* copy vendor css files */
-gulp.task('copy-css', function () {
-    console.log(input.vendor_css);
+gulp.task('build-vendor-css', function () {
     return gulp.src(input.vendor_css)
         .pipe(concat('vendor.css'))
         .pipe(gulp.dest(output.stylesheets));
@@ -115,5 +107,6 @@ function clean() {
 
 gulp.task('clean', clean);
 
-/* Build dist */
-gulp.task('default', ['jshint', 'build-js', 'build-vendor-js', 'build-css', 'copy-css', 'copy-html', 'watch']);
+gulp.task('default', ['jshint', 'build-js', 'build-vendor-js', 'build-css', 'build-vendor-css', 'copy-html', 'watch']);
+
+gulp.task('dist', ['build-js']);
