@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="save-button">
-                <button type="button" class="btn btn-default" ng-click="save()">Save</button>
+                <button type="button" class="btn btn-default" ng-click="saveFile()">Save</button>
             </div>
 
             <div class="user-name">
@@ -34,7 +34,6 @@
             <article>
                 <h1>{{content.title}}</h1>
                 <textarea
-                      id="example2"
                       materialize-textarea="true"
                       floating-label="{{content.title}}"
                       ng-model="content.body">
