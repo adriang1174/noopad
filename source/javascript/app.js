@@ -21,20 +21,29 @@ app.config(function(DropboxProvider, noopadConfig) {
                     
                 });
             }, function error(reason) {
-                $window.alert('Authentication failed with: ' + reason);
+                $toast.show('Authentication failed with: ' + reason);
             });
         }
 
         function showFile(filename) {
-            Dropbox.readFile(filename).then(function success(fileData) {
+            Dropbox.readFile(filename).then(function success(filedata) {
                 $scope.content = {
                     title: filename,
-                    body: fileData
+                    body: filedata
                 };
             });
         }
 
+        function saveFile() {
+            var filename = $scope.content.title,
+                body = $scope.content.body;
+
+            Dropbox.writeFile(filename, body).then(function success() {
+                console.log('saved file ' + filename);
+            });
+        }
         
         $scope.login = login;
         $scope.showFile = showFile;
+        $scope.saveFile = saveFile;
     });
