@@ -35,6 +35,6 @@ app.config(function(DropboxProvider, noopadConfig) {
         }
 
         
-        $scope.authenticate = login;
+        $scope.login = login;
         $scope.showFile = showFile;
     });
