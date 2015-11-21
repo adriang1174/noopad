@@ -39,7 +39,7 @@ app.config(function(DropboxProvider, noopadConfig) {
                 body = $scope.content.body;
 
             Dropbox.writeFile(filename, body).then(function success() {
-                console.log('saved file ' + filename);
+                $toast.show('Saved ' + filename);
             });
         }
         
