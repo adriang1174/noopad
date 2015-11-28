@@ -1,14 +1,14 @@
 /*jshint camelcase: false */
+(function() {
+'use strict';
 
-var app = angular.module('noopad', ['dropbox', 'noopad.config', 'ngMaterialize']);
+var app = angular.module('noopad', ['dropbox', 'noopad.config', 'ngMaterialize', 'ngRoute']);
 
 app.config(function(DropboxProvider, noopadConfig) {
-        'use strict';
         DropboxProvider.config(noopadConfig.dropboxApiKey, noopadConfig.baseUrl + 'callback.html');
     });
-    
+
 app.controller('nooController', function(Dropbox, $window, $toast) {
-        'use strict';
         var vm = this;
 
         function login() {
@@ -73,3 +73,4 @@ app.controller('nooController', function(Dropbox, $window, $toast) {
         vm.showFile = showFile;
         vm.saveFile = saveFile;
     });
+})();
