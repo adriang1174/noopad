@@ -5,8 +5,9 @@ var app = angular.module('noopad', ['dropbox', 'noopad.config', 'ngMaterialize']
 app.config(function(DropboxProvider, noopadConfig) {
         'use strict';
         DropboxProvider.config(noopadConfig.dropboxApiKey, noopadConfig.baseUrl + 'callback.html');
-    })
-    .controller('AppController', function($scope, Dropbox, $window, $toast) {
+    });
+    
+app.controller('AppController', function($scope, Dropbox, $window, $toast) {
         'use strict';
 
         function login() {
@@ -21,6 +22,7 @@ app.config(function(DropboxProvider, noopadConfig) {
                 }
 
             }, function error(reason) {
+                $scope.isLoggedIn = false;
                 $toast.show('Authentication failed with: ' + reason);
             });
         }
@@ -35,7 +37,6 @@ app.config(function(DropboxProvider, noopadConfig) {
             Dropbox.accountInfo().then(function(accountInfo) {
                 $scope.userDisplayName = accountInfo.name_details.familiar_name;
                 $toast.show('Logged in as ' + accountInfo.display_name);
-
                 Dropbox.readdir('/').then(function success(entries) {
                     $scope.files = entries;
                 });           
@@ -64,6 +65,7 @@ app.config(function(DropboxProvider, noopadConfig) {
         if (localStorage['ngDropbox.oauth']) {
             var oauth = angular.fromJson(localStorage['ngDropbox.oauth']);
             Dropbox.setCredentials(oauth);
+            $scope.isLoggedIn = true;
             getAccount();
         }
         
