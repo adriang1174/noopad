@@ -7,22 +7,23 @@ app.config(function(DropboxProvider, noopadConfig) {
         DropboxProvider.config(noopadConfig.dropboxApiKey, noopadConfig.baseUrl + 'callback.html');
     });
     
-app.controller('AppController', function($scope, Dropbox, $window, $toast) {
+app.controller('nooController', function(Dropbox, $window, $toast) {
         'use strict';
+        var vm = this;
 
         function login() {
             Dropbox.authenticate().then(function success(oauth) {
                 if (oauth.uid) {
                     localStorage['ngDropbox.oauth'] = angular.toJson(oauth);
-                    $scope.isLoggedIn = true;
+                    vm.isLoggedIn = true;
                     getAccount();
                 } else {
                     $window.console.log('Missing oauth token!');
-                    $scope.isLoggedIn = false;
+                    vm.isLoggedIn = false;
                 }
 
             }, function error(reason) {
-                $scope.isLoggedIn = false;
+                vm.isLoggedIn = false;
                 $toast.show('Authentication failed with: ' + reason);
             });
         }
@@ -30,22 +31,21 @@ app.controller('AppController', function($scope, Dropbox, $window, $toast) {
         function logoff() {
             localStorage.removeItem('ngDropbox.oauth');
             Dropbox.setCredentials('');
-            $scope.isLoggedIn = false;
+            vm.isLoggedIn = false;
         }
 
         function getAccount() {
             Dropbox.accountInfo().then(function(accountInfo) {
-                $scope.userDisplayName = accountInfo.name_details.familiar_name;
                 $toast.show('Logged in as ' + accountInfo.display_name);
                 Dropbox.readdir('/').then(function success(entries) {
-                    $scope.files = entries;
+                    vm.files = entries;
                 });           
             });
         }
 
         function showFile(filename) {
             Dropbox.readFile(filename).then(function success(filedata) {
-                $scope.content = {
+                vm.content = {
                     title: filename,
                     body: filedata
                 };
@@ -53,9 +53,8 @@ app.controller('AppController', function($scope, Dropbox, $window, $toast) {
         }
 
         function saveFile() {
-            var filename = $scope.content.title,
-                body = $scope.content.body;
-
+            var filename = vm.content.title,
+                body = vm.content.body;
             Dropbox.writeFile(filename, body).then(function success() {
                 $toast.show('Saved ' + filename);
             });
@@ -65,12 +64,12 @@ app.controller('AppController', function($scope, Dropbox, $window, $toast) {
         if (localStorage['ngDropbox.oauth']) {
             var oauth = angular.fromJson(localStorage['ngDropbox.oauth']);
             Dropbox.setCredentials(oauth);
-            $scope.isLoggedIn = true;
+            vm.isLoggedIn = true;
             getAccount();
         }
         
-        $scope.login = login;
-        $scope.logoff = logoff;
-        $scope.showFile = showFile;
-        $scope.saveFile = saveFile;
+        vm.login = login;
+        vm.logoff = logoff;
+        vm.showFile = showFile;
+        vm.saveFile = saveFile;
     });
