@@ -16,9 +16,8 @@ body {
 }
 
 article {
-   /* border: 1px dotted; */
-    margin: 5px;
-    padding: 15px;
+    /*border: 1px dotted;*/
+    padding: 0 10px 0 10px;
     color: $article-font-color;
 
 }
@@ -40,6 +39,12 @@ article {
     
     padding: 0 0 120px;
     background-color: $background-color;
+
+    .menu {
+        height: 35px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
 
     .create-button {
         @include span-columns(3);
