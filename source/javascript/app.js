@@ -24,7 +24,9 @@ $routeProvider
 });
 
 app.controller('loginController', function($location, $toast, $window, Dropbox) {
-    this.login = function() {
+    var vm = this;
+    
+    vm.login = function() {
         Dropbox.authenticate().then(function success(oauth) {
             if (oauth.uid) {
                 localStorage['ngDropbox.oauth'] = angular.toJson(oauth);
@@ -36,7 +38,7 @@ app.controller('loginController', function($location, $toast, $window, Dropbox) 
             $toast.show('Authentication failed with: ' + reason);
         });
     };
-    
+
     // If we already have an auth go directly to editor
     if (localStorage['ngDropbox.oauth']) {
         $location.path('/editor');
