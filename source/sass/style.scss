@@ -37,19 +37,31 @@ article {
     padding: 0 0 120px;
     background-color: $background-color;
 
-    .files-dropdown {
+    .create-button {
         @include span-columns(3);
         /*background-color: yellow;*/
     }
  
-    .user-name {
-        @include span-columns(6);
+    .save-button {
+        @include span-columns(3);
         /*background-color: orange;*/
     }
 
-    .user-name {
-        @include span-columns(6);
-        @include omega();
+    .files-dropdown {
+        @include span-columns(3);
         /*background-color: blue;*/
     }
+
+    .logon-button {
+        @include span-columns(8);
+        @include omega();
+        /*background-color: orange;*/
+    }
+
+    .logoff-button {
+        @include span-columns(3);
+        @include omega();
+        /*background-color: orange;*/
+    }
+
 }

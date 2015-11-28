@@ -10,37 +10,30 @@
 </head>
 
 <body ng-controller="AppController">
-        <div class="container">
-            <div class="files-dropdown">
-                <div dropdown>
-                    <button type="button" dropdown-toggle class="btn btn-default">Files</button>
-                    <ul class="dropdown-menu">
-                        <li ng-repeat="file in files">
-                            <a href="" ng-click="showFile(file)">{{file}}</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="save-button">
-                <button type="button" class="btn btn-default" ng-click="saveFile()">Save</button>
-            </div>
+    <div class="container">
+        <button type="button" class="login-button btn btn-default" ng-if="!userDisplayName" ng-click="login()">Login</button>
 
-            <div class="user-name">
-                <div ng-if="!userDisplayName">
-                    <a href="" ng-click="login()">Log in</a>
-                </div>
+        <div ng-if="userDisplayName">
+            <button type="button" class="create-button btn btn-default" ng-click="newFile()">Create</button>
+            <button type="button" class="save-button btn btn-default" ng-click="saveFile()">Save</button>
+            <div dropdown>
+                <button type="button" dropdown-toggle class="files-dropdown btn btn-default">Select File</button>
+                <ul class="dropdown-menu">
+                    <li ng-repeat="file in files">
+                        <a href="" ng-click="showFile(file)">{{file}}</a>
+                    </li>
+                </ul>
             </div>
+            <button type="button" class="logoff-button btn btn-default" ng-click="logoff()">Logoff</button>
+
 
             <article>
                 <h1>{{content.title}}</h1>
-                    <textarea
-                      materialize-textarea="true"
-                      floating-label="{{content.title}}"
-                      ng-model="content.body">
-                    </textarea>
+                <textarea materialize-textarea="true" floating-label="{{content.title}}" ng-model="content.body">
+                </textarea>
             </article>
         </div>
-
+    </div>
     <script src="js/vendor.js"></script>
     <script src="js/app.js"></script>
 </body>
