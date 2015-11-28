@@ -5,7 +5,8 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "angular": "~1.4.7",
+    "angular": "1.4.7",
+    "angular-route": "1.4.7",
     "ngDropbox": "git@github.com:christiansmith/ngDropbox.git",
     "ng-materialize": "~0.1.2",
     "neat": "~1.7.2",

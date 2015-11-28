@@ -9,28 +9,10 @@
     <link rel="stylesheet" href="css/vendor.css">
 </head>
 
-<body class="container" ng-controller="nooController as nooCtrl" ng-cloak>
-    <button type="button" class="login-button btn btn-default" ng-if="!nooCtrl.isLoggedIn" ng-click="nooCtrl.login()">Login</button>
-    <div ng-if="nooCtrl.isLoggedIn">
-        <div class="menu">
-            <div dropdown class="files-dropdown">
-                <button type="button" dropdown-toggle class="btn btn-default">Select File</button>
-                <ul class="dropdown-menu">
-                    <li ng-repeat="file in nooCtrl.files">
-                        <a href="" ng-click="nooCtrl.showFile(file)">{{file}}</a>
-                    </li>
-                </ul>
-            </div>
-            <button type="button" class="create-button btn btn-default" ng-click="nooCtrl.newFile()">New</button>
-            <button type="button" class="save-button btn btn-default" ng-click="nooCtrl.saveFile()">Save</button>
-            <button type="button" class="logoff-button btn btn-default" ng-click="nooCtrl.logoff()">Logoff</button>
-        </div>
-        <article>
-            <h1>{{nooCtrl.content.title}}</h1>
-            <textarea materialize-textarea="true" ng-model="nooCtrl.content.body">
-            </textarea>
-        </article>
-    </div>
+<body class="container" ng-cloak>
+    
+    <ng-view></ng-view>
+
     <script src="js/vendor.js"></script>
     <script src="js/app.js"></script>
 </body>

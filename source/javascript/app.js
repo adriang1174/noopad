@@ -8,30 +8,48 @@ app.config(function(DropboxProvider, noopadConfig) {
         DropboxProvider.config(noopadConfig.dropboxApiKey, noopadConfig.baseUrl + 'callback.html');
     });
 
-app.controller('nooController', function(Dropbox, $window, $toast) {
+app.config(function($routeProvider) {
+$routeProvider
+  .when('/login', {
+    templateUrl: 'login.html',
+    controller: 'loginController',
+    controllerAs: 'loginCtrl'
+  })
+  .when('/editor', { 
+    templateUrl: 'editor.html',
+    controller: 'editorController',
+    controllerAs: 'editorCtrl'
+  })
+  .otherwise({redirectTo: '/login'});
+});
+
+app.controller('loginController', function($location, $toast, $window, Dropbox) {
+    this.login = function() {
+        Dropbox.authenticate().then(function success(oauth) {
+            if (oauth.uid) {
+                localStorage['ngDropbox.oauth'] = angular.toJson(oauth);
+                $location.path('/editor');
+            } else {
+                $window.console.log('Missing oauth token!');
+            }
+        }, function error(reason) {
+            $toast.show('Authentication failed with: ' + reason);
+        });
+    };
+    
+    // If we already have an auth go directly to editor
+    if (localStorage['ngDropbox.oauth']) {
+        $location.path('/editor');
+    }
+});
+
+app.controller('editorController', function(Dropbox, $window, $toast, $location) {
         var vm = this;
-
-        function login() {
-            Dropbox.authenticate().then(function success(oauth) {
-                if (oauth.uid) {
-                    localStorage['ngDropbox.oauth'] = angular.toJson(oauth);
-                    vm.isLoggedIn = true;
-                    getAccount();
-                } else {
-                    $window.console.log('Missing oauth token!');
-                    vm.isLoggedIn = false;
-                }
-
-            }, function error(reason) {
-                vm.isLoggedIn = false;
-                $toast.show('Authentication failed with: ' + reason);
-            });
-        }
 
         function logoff() {
             localStorage.removeItem('ngDropbox.oauth');
             Dropbox.setCredentials('');
-            vm.isLoggedIn = false;
+            $location.path('/login');
         }
 
         function getAccount() {
@@ -40,6 +58,9 @@ app.controller('nooController', function(Dropbox, $window, $toast) {
                 Dropbox.readdir('/').then(function success(entries) {
                     vm.files = entries;
                 });           
+            }, function error() {
+                $window.console.log('Error. Could not get content.');
+                $location.path('/login');
             });
         }
 
@@ -60,15 +81,13 @@ app.controller('nooController', function(Dropbox, $window, $toast) {
             });
         }
 
-        // Try to login when instantiating the controller
+        // Get user info when instantiating the controller
         if (localStorage['ngDropbox.oauth']) {
             var oauth = angular.fromJson(localStorage['ngDropbox.oauth']);
             Dropbox.setCredentials(oauth);
-            vm.isLoggedIn = true;
             getAccount();
         }
         
-        vm.login = login;
         vm.logoff = logoff;
         vm.showFile = showFile;
         vm.saveFile = saveFile;

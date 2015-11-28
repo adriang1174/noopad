@@ -1,0 +1,18 @@
+<div class="menu">
+    <div dropdown class="files-dropdown">
+        <button type="button" dropdown-toggle class="btn btn-default">Select File</button>
+        <ul class="dropdown-menu">
+            <li ng-repeat="file in editorCtrl.files">
+                <a href="" ng-click="editorCtrl.showFile(file)">{{file}}</a>
+            </li>
+        </ul>
+    </div>
+    <button type="button" class="create-button btn btn-default" ng-click="editorCtrl.newFile()">New</button>
+    <button type="button" class="save-button btn btn-default" ng-click="editorCtrl.saveFile()">Save</button>
+    <button type="button" class="logoff-button btn btn-default" ng-click="editorCtrl.logoff()">Logoff</button>
+</div>
+<article>
+    <h1>{{editorCtrl.content.title}}</h1>
+    <textarea materialize-textarea="true" ng-model="editorCtrl.content.body">
+    </textarea>
+</article>

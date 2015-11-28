@@ -19,6 +19,7 @@ var gulp = require('gulp'),
                         ],
         'vendor_js':    [
                             'bower_components/angular/angular.js',
+                            'bower_components/angular-route/angular-route.js',
                             'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
                             'bower_components/ngDropbox/dropbox.js',
                             'bower_components/ng-materialize/dist/ng-materialize.js',
@@ -52,7 +53,7 @@ gulp.task('build-js', function () {
         .pipe(gulp.dest(output.javascript));
 });
 
-function makeConfig () {
+function makeConfig() {
     var env = (gutil.env.type === 'production' ? 'production' : 'localhost');
     gulp.src('./config.json')
         .pipe(gulpNgConfig(input.config, {
