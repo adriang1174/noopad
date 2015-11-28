@@ -13,11 +13,22 @@ app.config(function(DropboxProvider, noopadConfig) {
             Dropbox.authenticate().then(function success(oauth) {
                 if (oauth.uid) {
                     localStorage['ngDropbox.oauth'] = angular.toJson(oauth);
+                    $scope.isLoggedIn = true;
+                    getAccount();
+                } else {
+                    $window.console.log('Missing oauth token!');
+                    $scope.isLoggedIn = false;
                 }
-                getAccount();
+
             }, function error(reason) {
                 $toast.show('Authentication failed with: ' + reason);
             });
+        }
+
+        function logoff() {
+            localStorage.removeItem('ngDropbox.oauth');
+            Dropbox.setCredentials('');
+            $scope.isLoggedIn = false;
         }
 
         function getAccount() {
@@ -49,7 +60,7 @@ app.config(function(DropboxProvider, noopadConfig) {
             });
         }
 
-        // on page load try to login
+        // Try to login when instantiating the controller
         if (localStorage['ngDropbox.oauth']) {
             var oauth = angular.fromJson(localStorage['ngDropbox.oauth']);
             Dropbox.setCredentials(oauth);
@@ -57,6 +68,7 @@ app.config(function(DropboxProvider, noopadConfig) {
         }
         
         $scope.login = login;
+        $scope.logoff = logoff;
         $scope.showFile = showFile;
         $scope.saveFile = saveFile;
     });

@@ -11,9 +11,9 @@
 
 <body ng-controller="AppController">
     <div class="container">
-        <button type="button" class="login-button btn btn-default" ng-if="!userDisplayName" ng-click="login()">Login</button>
+        <button type="button" class="login-button btn btn-default" ng-if="!isLoggedIn" ng-click="login()">Login</button>
 
-        <div ng-if="userDisplayName">
+        <div ng-if="isLoggedIn">
             <button type="button" class="create-button btn btn-default" ng-click="newFile()">Create</button>
             <button type="button" class="save-button btn btn-default" ng-click="saveFile()">Save</button>
             <div dropdown>
