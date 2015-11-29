@@ -25,6 +25,13 @@ $routeProvider
   .otherwise({redirectTo: '/login'});
 });
 
+app.filter('editorUrl', function($window) {
+  return function(url) {
+        var noSlashUrl = url.substring(1);
+        return '#/editor/' + $window.encodeURIComponent(noSlashUrl);
+    };
+});
+
 app.controller('loginController', function($location, $toast, $window, Dropbox, noopadKey) {
     var vm = this;
 
@@ -70,8 +77,11 @@ app.controller('editorController', function(Dropbox, $window, $toast, $location,
             } else {
                 $location.path('/login');
             }
-
-            $window.console.log('filename: ' + $routeParams.filename);
+    
+           if ($routeParams.filename) {
+                var dropboxName = '/' + $window.decodeURIComponent($routeParams.filename);
+                getFile(dropboxName);
+            }
         }
 
         function logoff() {
@@ -80,7 +90,7 @@ app.controller('editorController', function(Dropbox, $window, $toast, $location,
             $location.path('/login');
         }
 
-        function showFile(filename) {
+        function getFile(filename) {
             Dropbox.readFile(filename).then(function success(filedata) {
                 vm.content = {
                     title: filename,
@@ -100,7 +110,6 @@ app.controller('editorController', function(Dropbox, $window, $toast, $location,
         setupEditor();
 
         vm.logoff = logoff;
-        vm.showFile = showFile;
         vm.saveFile = saveFile;
     });
 })();
