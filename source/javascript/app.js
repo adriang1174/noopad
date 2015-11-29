@@ -17,10 +17,11 @@ $routeProvider
     controller: 'loginController',
     controllerAs: 'loginCtrl'
   })
-  .when('/editor/:filename?', { 
+  .when('/editor', { 
     templateUrl: 'editor.html',
     controller: 'editorController',
-    controllerAs: 'editorCtrl'
+    controllerAs: 'editorCtrl',
+    reloadOnSearch: false
   })
   .otherwise({redirectTo: '/login'});
 });
@@ -28,7 +29,7 @@ $routeProvider
 app.filter('editorUrl', function($window) {
   return function(url) {
         var noSlashUrl = url.substring(1);
-        return '#/editor/' + $window.encodeURIComponent(noSlashUrl);
+        return '#/editor?f=' + $window.encodeURIComponent(noSlashUrl);
     };
 });
 
@@ -78,8 +79,8 @@ app.controller('editorController', function(Dropbox, $window, $toast, $location,
                 $location.path('/login');
             }
     
-           if ($routeParams.filename) {
-                var dropboxName = '/' + $window.decodeURIComponent($routeParams.filename);
+           if ($location.search().f) {
+                var dropboxName = '/' + $window.decodeURIComponent($location.search().f);
                 getFile(dropboxName);
             }
         }
@@ -109,6 +110,7 @@ app.controller('editorController', function(Dropbox, $window, $toast, $location,
 
         setupEditor();
 
+        vm.getFile = getFile;
         vm.logoff = logoff;
         vm.saveFile = saveFile;
     });
