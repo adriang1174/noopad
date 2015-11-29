@@ -55,7 +55,7 @@ app.controller('loginController', function($location, $toast, $window, Dropbox, 
     }
 });
 
-app.controller('editorController', function(Dropbox, $window, $toast, $location, $routeParams, noopadKey) {
+app.controller('editorController', function(Dropbox, $window, $toast, $location, noopadKey) {
         var vm = this;
 
         function getAccount() {
@@ -64,9 +64,6 @@ app.controller('editorController', function(Dropbox, $window, $toast, $location,
                 Dropbox.readdir('/').then(function success(entries) {
                     vm.files = entries;
                 });           
-            }, function error() {
-                $window.console.log('Error. Could not get content.');
-                $location.path('/login');
             });
         }
 
@@ -75,13 +72,12 @@ app.controller('editorController', function(Dropbox, $window, $toast, $location,
                 var oauth = angular.fromJson(localStorage[noopadKey]);
                 Dropbox.setCredentials(oauth);
                 getAccount();
+                if ($location.search().f) {
+                     var dropboxName = '/' + $window.decodeURIComponent($location.search().f);
+                     getFile(dropboxName);
+                 }
             } else {
-                $location.path('/login');
-            }
-    
-           if ($location.search().f) {
-                var dropboxName = '/' + $window.decodeURIComponent($location.search().f);
-                getFile(dropboxName);
+               $location.path('/login');
             }
         }
 
