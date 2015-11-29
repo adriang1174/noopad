@@ -17,7 +17,7 @@ $routeProvider
     controller: 'loginController',
     controllerAs: 'loginCtrl'
   })
-  .when('/editor', { 
+  .when('/editor/:filename?', { 
     templateUrl: 'editor.html',
     controller: 'editorController',
     controllerAs: 'editorCtrl'
@@ -47,7 +47,7 @@ app.controller('loginController', function($location, $toast, $window, Dropbox, 
     }
 });
 
-app.controller('editorController', function(Dropbox, $window, $toast, $location, noopadKey) {
+app.controller('editorController', function(Dropbox, $window, $toast, $location, $routeParams, noopadKey) {
         var vm = this;
 
         function getAccount() {
@@ -70,6 +70,8 @@ app.controller('editorController', function(Dropbox, $window, $toast, $location,
             } else {
                 $location.path('/login');
             }
+
+            $window.console.log('filename: ' + $routeParams.filename);
         }
 
         function logoff() {
