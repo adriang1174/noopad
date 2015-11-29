@@ -4,6 +4,8 @@
 
 var app = angular.module('noopad', ['dropbox', 'noopad.config', 'ngMaterialize', 'ngRoute']);
 
+app.constant('noopadKey','noopad.oauth');
+
 app.config(function(DropboxProvider, noopadConfig) {
         DropboxProvider.config(noopadConfig.dropboxApiKey, noopadConfig.baseUrl + 'callback.html');
     });
@@ -23,13 +25,13 @@ $routeProvider
   .otherwise({redirectTo: '/login'});
 });
 
-app.controller('loginController', function($location, $toast, $window, Dropbox) {
+app.controller('loginController', function($location, $toast, $window, Dropbox, noopadKey) {
     var vm = this;
-    
+
     vm.login = function() {
         Dropbox.authenticate().then(function success(oauth) {
             if (oauth.uid) {
-                localStorage['ngDropbox.oauth'] = angular.toJson(oauth);
+                localStorage[noopadKey] = angular.toJson(oauth);
                 $location.path('/editor');
             } else {
                 $window.console.log('Missing oauth token!');
@@ -40,16 +42,16 @@ app.controller('loginController', function($location, $toast, $window, Dropbox) 
     };
 
     // If we already have an auth go directly to editor
-    if (localStorage['ngDropbox.oauth']) {
+    if (localStorage[noopadKey]) {
         $location.path('/editor');
     }
 });
 
-app.controller('editorController', function(Dropbox, $window, $toast, $location) {
+app.controller('editorController', function(Dropbox, $window, $toast, $location, noopadKey) {
         var vm = this;
 
         function logoff() {
-            localStorage.removeItem('ngDropbox.oauth');
+            localStorage.removeItem(noopadKey);
             Dropbox.setCredentials('');
             $location.path('/login');
         }
@@ -84,10 +86,12 @@ app.controller('editorController', function(Dropbox, $window, $toast, $location)
         }
 
         // Get user info when instantiating the controller
-        if (localStorage['ngDropbox.oauth']) {
-            var oauth = angular.fromJson(localStorage['ngDropbox.oauth']);
+        if (localStorage[noopadKey]) {
+            var oauth = angular.fromJson(localStorage[noopadKey]);
             Dropbox.setCredentials(oauth);
             getAccount();
+        } else {
+            $location.path('/login');
         }
         
         vm.logoff = logoff;
