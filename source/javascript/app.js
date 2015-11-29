@@ -50,12 +50,6 @@ app.controller('loginController', function($location, $toast, $window, Dropbox, 
 app.controller('editorController', function(Dropbox, $window, $toast, $location, noopadKey) {
         var vm = this;
 
-        function logoff() {
-            localStorage.removeItem(noopadKey);
-            Dropbox.setCredentials('');
-            $location.path('/login');
-        }
-
         function getAccount() {
             Dropbox.accountInfo().then(function(accountInfo) {
                 $toast.show('Logged in as ' + accountInfo.display_name);
@@ -66,6 +60,22 @@ app.controller('editorController', function(Dropbox, $window, $toast, $location,
                 $window.console.log('Error. Could not get content.');
                 $location.path('/login');
             });
+        }
+
+        function setupEditor() {        
+            if (localStorage[noopadKey]) {
+                var oauth = angular.fromJson(localStorage[noopadKey]);
+                Dropbox.setCredentials(oauth);
+                getAccount();
+            } else {
+                $location.path('/login');
+            }
+        }
+
+        function logoff() {
+            localStorage.removeItem(noopadKey);
+            Dropbox.setCredentials('');
+            $location.path('/login');
         }
 
         function showFile(filename) {
@@ -85,15 +95,8 @@ app.controller('editorController', function(Dropbox, $window, $toast, $location,
             });
         }
 
-        // Get user info when instantiating the controller
-        if (localStorage[noopadKey]) {
-            var oauth = angular.fromJson(localStorage[noopadKey]);
-            Dropbox.setCredentials(oauth);
-            getAccount();
-        } else {
-            $location.path('/login');
-        }
-        
+        setupEditor();
+
         vm.logoff = logoff;
         vm.showFile = showFile;
         vm.saveFile = saveFile;
