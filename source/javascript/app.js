@@ -1,83 +1,85 @@
 /*jshint camelcase: false */
-(function() {
-'use strict';
+(function () {
+    'use strict';
 
-var app = angular.module('noopad', ['dropbox', 'noopad.config', 'ngMaterialize', 'ngRoute']);
+    var app = angular.module('noopad', ['dropbox', 'noopad.config', 'ngMaterialize', 'ngRoute']);
 
-app.constant('noopadKey','noopad.oauth');
+    app.constant('noopadKey', 'noopad.oauth');
 
-app.config(function(DropboxProvider, noopadConfig) {
+    app.config(function (DropboxProvider, noopadConfig) {
         DropboxProvider.config(noopadConfig.dropboxApiKey, noopadConfig.baseUrl + 'callback.html');
     });
 
-app.config(function($routeProvider) {
-$routeProvider
-  .when('/login', {
-    templateUrl: 'login.html',
-    controller: 'loginController',
-    controllerAs: 'loginCtrl'
-  })
-  .when('/editor', { 
-    templateUrl: 'editor.html',
-    controller: 'editorController',
-    controllerAs: 'editorCtrl',
-    reloadOnSearch: false
-  })
-  .otherwise({redirectTo: '/login'});
-});
+    app.config(function ($routeProvider) {
+        $routeProvider
+            .when('/login', {
+                templateUrl: 'login.html',
+                controller: 'loginController',
+                controllerAs: 'loginCtrl'
+            })
+            .when('/editor', {
+                templateUrl: 'editor.html',
+                controller: 'editorController',
+                controllerAs: 'editorCtrl',
+                reloadOnSearch: false
+            })
+            .otherwise({
+                redirectTo: '/login'
+            });
+    });
 
-app.filter('editorUrl', function($window) {
-  return function(url) {
-        var noSlashUrl = url.substring(1);
-        return '#/editor?f=' + $window.encodeURIComponent(noSlashUrl);
-    };
-});
+    app.filter('editorUrl', function ($window) {
+        return function (url) {
+            var noSlashUrl = url.substring(1);
+            return '#/editor?f=' + $window.encodeURIComponent(noSlashUrl);
+        };
+    });
 
-app.controller('loginController', function($location, $toast, $window, Dropbox, noopadKey) {
-    var vm = this;
+    app.controller('loginController', function ($location, $toast, $window, Dropbox, noopadKey) {
+        var vm = this;
 
-    vm.login = function() {
-        Dropbox.authenticate().then(function success(oauth) {
-            if (oauth.uid) {
-                localStorage[noopadKey] = angular.toJson(oauth);
-                $location.path('/editor');
-            } else {
-                $window.console.log('Missing oauth token!');
-            }
-        }, function error(reason) {
-            $toast.show('Authentication failed with: ' + reason);
-        });
-    };
+        vm.login = function () {
+            Dropbox.authenticate().then(function success(oauth) {
+                if (oauth.uid) {
+                    localStorage[noopadKey] = angular.toJson(oauth);
+                    $location.path('/editor');
+                } else {
+                    $window.console.log('Missing oauth token!');
+                }
+            }, function error(reason) {
+                $toast.show('Authentication failed with: ' + reason);
+            });
+        };
 
-    // If we already have an auth go directly to editor
-    if (localStorage[noopadKey]) {
-        $location.path('/editor');
-    }
-});
+        // If we already have an auth go directly to editor
+        if (localStorage[noopadKey]) {
+            $location.path('/editor');
+        }
+    });
 
-app.controller('editorController', function(Dropbox, $window, $toast, $location, noopadKey) {
+    app.controller('editorController', function (Dropbox, $window, $toast, $location, noopadKey) {
         var vm = this;
 
         function getAccount() {
-            Dropbox.accountInfo().then(function(accountInfo) {
+            Dropbox.accountInfo().then(function (accountInfo) {
                 $toast.show('Logged in as ' + accountInfo.display_name);
                 Dropbox.readdir('/').then(function success(entries) {
                     vm.files = entries;
-                });           
+                });
             });
         }
 
-        function setupEditor() {        
+        function setupEditor() {
             if (localStorage[noopadKey]) {
                 var oauth = angular.fromJson(localStorage[noopadKey]);
                 Dropbox.setCredentials(oauth);
                 getAccount();
                 if ($location.search().f) {
-                     var dropboxName = '/' + $window.decodeURIComponent($location.search().f);
-                     getFile(dropboxName);
-                 }
+                    var dropboxName = '/' + $window.decodeURIComponent($location.search().f);
+                    getFile(dropboxName);
+                }
             } else {
-               $location.path('/login');
+                $location.path('/login');
             }
         }
 
