@@ -2,7 +2,7 @@
 (function () {
     'use strict';
 
-    var app = angular.module('noopad', ['dropbox', 'noopad.config', 'ngMaterialize', 'ngRoute']);
+    var app = angular.module('noopad', ['dropbox', 'noopad.config', 'ngMaterialize', 'ngRoute', 'cfp.hotkeys']);
 
     app.constant('noopadKey', 'noopad.oauth');
 
@@ -21,7 +21,10 @@
                 templateUrl: 'editor.html',
                 controller: 'editorController',
                 controllerAs: 'editorCtrl',
-                reloadOnSearch: false
+                reloadOnSearch: false,
+                hotkeys: [
+                      ['command+shift+s', 'Save file', 'editorCtrl.saveFile()']
+                    ]
             })
             .otherwise({
                 redirectTo: '/login'

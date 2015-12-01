@@ -15,7 +15,8 @@ var gulp = require('gulp'),
         'javascript':   'source/javascript/**/*.js',
         'vendor_css':   [
                             'bower_components/ng-materialize/dist/ng-materialize.min.css',
-                            'bower_components/waves/dist/waves.min.css'                            
+                            'bower_components/waves/dist/waves.min.css',
+                            'bower_components/angular-hotkeys/build/hotkeys.min.css'                         
                         ],
         'vendor_js':    [
                             'bower_components/angular/angular.js',
@@ -24,7 +25,8 @@ var gulp = require('gulp'),
                             'bower_components/ngDropbox/dropbox.js',
                             'bower_components/ng-materialize/dist/ng-materialize.js',
                             'bower_components/angular-animate/angular-animate.js',
-                            'bower_components/waves/dist/waves.min.js'
+                            'bower_components/waves/dist/waves.min.js',
+                            'bower_components/angular-hotkeys/build/hotkeys.js'
                         ],
         'config': 'noopad.config'
     },

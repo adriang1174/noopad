@@ -10,6 +10,7 @@
     "ngDropbox": "git@github.com:christiansmith/ngDropbox.git",
     "ng-materialize": "~0.1.2",
     "neat": "~1.7.2",
-    "bourbon": "~4.2.6"
+    "bourbon": "~4.2.6",
+    "angular-hotkeys": "chieffancypants/angular-hotkeys#~1.6.0"
   }
 }
