@@ -44,7 +44,9 @@ gulp.task('jshint', function () {
 });
 
 gulp.task('build-js', function () {
-    makeConfig();
+    // if (!exist /source/javascript/config.js) {
+    //     configure();   
+    // }
     return gulp.src(input.javascript)
         .pipe(print())
         .pipe(sourcemaps.init())
@@ -53,15 +55,6 @@ gulp.task('build-js', function () {
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(output.javascript));
 });
-
-function makeConfig() {
-    var env = (gutil.env.type === 'production' ? 'production' : 'localhost');
-    gulp.src('./config.json')
-        .pipe(gulpNgConfig(input.config, {
-            environment: env
-        }))
-        .pipe(gulp.dest('source/javascript'));
-}
 
 gulp.task('build-vendor-js', function () {
     return gulp.src(input.vendor_js)
@@ -83,25 +76,35 @@ gulp.task('build-css', function () {
         .pipe(gulp.dest(output.stylesheets));
 });
 
-/* copy vendor css files */
 gulp.task('build-vendor-css', function () {
     return gulp.src(input.vendor_css)
         .pipe(concat('vendor.css'))
         .pipe(gulp.dest(output.stylesheets));
 });
 
-/* copy any html files to dist */
 gulp.task('copy-html', function () {
     return gulp.src(input.html)
         .pipe(gulp.dest(output.html));
 });
 
-/* Watch these files for changes and run the task on update */
 gulp.task('watch', function () {
     gulp.watch(input.javascript, ['jshint', 'build-js']);
     gulp.watch(input.sass, ['build-css']);
     gulp.watch(input.html, ['copy-html']);
 });
+
+function configure() {
+    var env = (gutil.env.type === 'production' ? 'production' : 'localhost');
+    console.log('YIR! were going to ' + env);
+    gulp.src('./config.json')
+        .pipe(gulpNgConfig(input.config, {
+            environment: env
+        }))
+        .pipe(gulp.dest('source/javascript'));
+};
+
+// This generates source/javascript/config.js
+gulp.task('configure', configure);
 
 function clean() {
     del([output.dist, 'source/javascript/config.js']);
@@ -111,4 +114,4 @@ gulp.task('clean', clean);
 
 gulp.task('default', ['jshint', 'build-js', 'build-vendor-js', 'build-css', 'build-vendor-css', 'copy-html', 'watch']);
 
-gulp.task('dist', ['build-js']);
+gulp.task('dist', ['build-js', 'build-vendor-js', 'build-css', 'build-vendor-css', 'copy-html']);
