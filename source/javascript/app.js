@@ -21,10 +21,7 @@
                 templateUrl: 'editor.html',
                 controller: 'editorController',
                 controllerAs: 'editorCtrl',
-                reloadOnSearch: false,
-                hotkeys: [
-                      ['command+shift+s', 'Save file', 'editorCtrl.saveFile()']
-                    ]
+                reloadOnSearch: false
             })
             .otherwise({
                 redirectTo: '/login'
@@ -60,8 +57,17 @@
         }
     });
 
-    app.controller('editorController', function (Dropbox, $window, $toast, $location, noopadKey) {
+    app.controller('editorController', function (Dropbox, $window, $toast, $location, noopadKey, hotkeys) {
         var vm = this;
+
+        hotkeys.add({
+          combo: 'command+s',
+          description: 'Description goes here',
+          callback: function(event, hotkey) {
+            vm.saveFile();
+            event.preventDefault();
+          }
+        });
 
         function getAccount() {
             Dropbox.accountInfo().then(function (accountInfo) {
