@@ -21,11 +21,10 @@ var gulp = require('gulp'),
         'vendor_js':    [
                             'bower_components/angular/angular.js',
                             'bower_components/angular-route/angular-route.js',
-                            'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
                             'bower_components/ngDropbox/dropbox.js',
                             'bower_components/ng-materialize/dist/ng-materialize.js',
                             'bower_components/angular-animate/angular-animate.js',
-                            'bower_components/waves/dist/waves.min.js',
+                            'bower_components/waves/dist/waves.js',
                             'bower_components/angular-hotkeys/build/hotkeys.js'
                         ],
         'config': 'noopad.config'
