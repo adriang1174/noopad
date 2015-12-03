@@ -1,3 +1,3 @@
 #!/bin/sh
 
-gulp configure --type=github && gulp dist
+gulp configure --type=ghpages && gulp dist
