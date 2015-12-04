@@ -94,14 +94,14 @@ gulp.task('watch', function () {
 });
 
 function configure() {
-    var env = (gutil.env.type === 'production' ? 'production' : 'localhost');
-    console.log('YIR! were going to ' + env);
+    //var env = (gutil.env.type === 'production' ? 'production' : 'localhost');
+    console.log('YIR! were going to ' + gutil.env.type);
     gulp.src('./config.json')
         .pipe(gulpNgConfig(input.config, {
-            environment: env
+            environment: gutil.env.type
         }))
         .pipe(gulp.dest('source/javascript'));
-};
+}
 
 // This generates source/javascript/config.js
 gulp.task('configure', configure);
