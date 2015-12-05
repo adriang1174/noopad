@@ -8,6 +8,7 @@ set -e # exit with nonzero exit code if anything fails
 # clean and build our app
 gulp clean
 gulp configure --type=ghpages
+cat source/javascript/config.js
 gulp dist
 
 # go to the out directory and create a *new* Git repo
