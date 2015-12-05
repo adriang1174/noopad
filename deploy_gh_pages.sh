@@ -14,6 +14,7 @@ gulp configure --type=ghpages && gulp dist
 # go to the out directory and create a *new* Git repo
 cd dist
 git init
+git config --global url."https://".insteadOf git://﻿
 
 # inside this git repo we'll pretend to be a new user
 git config user.name "Travis CI"
