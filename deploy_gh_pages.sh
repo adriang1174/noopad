@@ -9,12 +9,13 @@ set -e # exit with nonzero exit code if anything fails
 gulp clean
 
 # run our compile script, discussed above
-gulp configure --type=ghpages && gulp dist
+gulp configure --type=ghpages
+gulp dist
 
 # go to the out directory and create a *new* Git repo
 cd dist
 git init
-git config --global url."https://".insteadOf git://﻿
+#git config --global url."https://".insteadOf git://﻿
 
 # inside this git repo we'll pretend to be a new user
 git config user.name "Travis CI"
