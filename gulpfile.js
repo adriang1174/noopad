@@ -1,7 +1,7 @@
 var gulp = require('gulp'),
     gutil = require('gulp-util'),
     jshint = require('gulp-jshint'),
-    compass = require('gulp-compass'),
+    sass = require('gulp-sass'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     sourcemaps = require('gulp-sourcemaps'),
@@ -67,12 +67,9 @@ gulp.task('build-vendor-js', function () {
 
 gulp.task('build-css', function () {
     return gulp.src(input.sass)
-        .pipe(sourcemaps.init())
-        .pipe(compass({
-            css: 'dist/css',
-            sass: 'source/sass'
-        }))
-        .pipe(sourcemaps.write())
+        //.pipe(sourcemaps.init())
+        .pipe(sass().on('error', sass.logError))
+        //.pipe(sourcemaps.write())
         .pipe(gulp.dest(output.stylesheets));
 });
 
