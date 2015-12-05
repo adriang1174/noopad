@@ -5,10 +5,8 @@
 
 set -e # exit with nonzero exit code if anything fails
 
-# clear and re-create the out directory
+# clean and build our app
 gulp clean
-
-# run our compile script, discussed above
 gulp configure --type=ghpages
 gulp dist
 
