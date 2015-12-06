@@ -6,6 +6,5 @@ bower_components*
 dist
 
 deploy.sh
-config.json
 
 source/javascript/config.js

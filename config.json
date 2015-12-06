@@ -1,0 +1,20 @@
+{
+  "localhost": {
+    "noopadConfig": {
+        "baseUrl": "http://localhost:8080/dist/",
+        "dropboxApiKey": "0v2on491jcvssod"
+    }
+  },
+  "production": {
+    "noopadConfig": {
+        "baseUrl": "https://noo.sphae.re/",
+        "dropboxApiKey": "0v2on491jcvssod"
+    }
+  },
+  "ghpages": {
+    "noopadConfig": {
+        "baseUrl": "https://bangkarlsen.github.io/noopad/",
+        "dropboxApiKey": "0v2on491jcvssod"
+    }
+  }
+}
