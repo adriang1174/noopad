@@ -1,4 +1,4 @@
-script: bash ./deploy_gh_pages.sh
+script: bash ./deploy_github.sh
 env:
   global:
   - GH_REF: github.com/BangKarlsen/noopad.git

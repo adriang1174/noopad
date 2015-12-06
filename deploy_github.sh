@@ -7,7 +7,7 @@ set -e # exit with nonzero exit code if anything fails
 
 # clean and build our app
 gulp clean
-gulp configure --type=ghpages
+gulp configure --type=github
 cat source/javascript/config.js
 gulp dist
 
