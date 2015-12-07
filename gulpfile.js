@@ -84,6 +84,11 @@ gulp.task('copy-html', function () {
         .pipe(gulp.dest(output.html));
 });
 
+gulp.task('copy-readme', function () {
+    return gulp.src('README.md')
+        .pipe(gulp.dest('dist'));
+});
+
 gulp.task('watch', function () {
     gulp.watch(input.javascript, ['jshint', 'build-js']);
     gulp.watch(input.sass, ['build-css']);
@@ -109,6 +114,6 @@ function clean() {
 
 gulp.task('clean', clean);
 
-gulp.task('default', ['jshint', 'build-js', 'build-vendor-js', 'build-css', 'build-vendor-css', 'copy-html', 'watch']);
+gulp.task('default', ['jshint', 'build-js', 'build-vendor-js', 'build-css', 'build-vendor-css', 'copy-html', 'copy-readme', 'watch']);
 
-gulp.task('dist', ['build-js', 'build-vendor-js', 'build-css', 'build-vendor-css', 'copy-html']);
+gulp.task('dist', ['build-js', 'build-vendor-js', 'build-css', 'build-vendor-css', 'copy-html', 'copy-readme']);
