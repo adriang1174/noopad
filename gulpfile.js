@@ -10,7 +10,7 @@ var gulp = require('gulp'),
     del = require('del'),
 
     input = {
-        'html':         'source/*.html',
+        'html':         'source/**/*.html',
         'sass':         'source/sass/**/*.scss',
         'javascript':   'source/javascript/**/*.js',
         'vendor_css':   [

@@ -13,12 +13,12 @@
     app.config(function ($routeProvider) {
         $routeProvider
             .when('/login', {
-                templateUrl: 'login.html',
+                templateUrl: 'partials/login.html',
                 controller: 'loginController',
                 controllerAs: 'loginCtrl'
             })
             .when('/editor', {
-                templateUrl: 'editor.html',
+                templateUrl: 'partials/editor.html',
                 controller: 'editorController',
                 controllerAs: 'editorCtrl',
                 reloadOnSearch: false
