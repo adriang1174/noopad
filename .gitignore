@@ -5,6 +5,6 @@ node_modules
 bower_components*
 dist
 
-deploy.sh
+deploy_noosphaere.sh
 
 source/javascript/config.js
