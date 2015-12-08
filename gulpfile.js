@@ -8,6 +8,7 @@ var gulp = require('gulp'),
     gulpNgConfig = require('gulp-ng-config'),
     print = require('gulp-print'),
     del = require('del'),
+    connect = require('gulp-connect'),
 
     input = {
         'html':         'source/**/*.html',
@@ -48,7 +49,7 @@ gulp.task('build-js', function () {
     //     configure();   
     // }
     return gulp.src(input.javascript)
-        .pipe(print())
+        //.pipe(print())
         .pipe(sourcemaps.init())
         .pipe(concat('app.js'))
         //.pipe(gutil.env.type === 'production' ? uglify() : gutil.noop())
@@ -93,6 +94,19 @@ gulp.task('watch', function () {
     gulp.watch(input.javascript, ['jshint', 'build-js']);
     gulp.watch(input.sass, ['build-css']);
     gulp.watch(input.html, ['copy-html']);
+    gulp.watch([output.dist + '/**/*.*'], ['reload']);
+});
+
+gulp.task('reload', function () {
+  gulp.src(output.dist + '/**/*.*')
+    .pipe(connect.reload());
+});
+
+gulp.task('connect', function() {
+    connect.server({
+    root: 'dist',
+    livereload: true
+  });
 });
 
 function configure() {
@@ -114,6 +128,6 @@ function clean() {
 
 gulp.task('clean', clean);
 
-gulp.task('default', ['jshint', 'build-js', 'build-vendor-js', 'build-css', 'build-vendor-css', 'copy-html', 'copy-readme', 'watch']);
+gulp.task('default', ['jshint', 'build-js', 'build-vendor-js', 'build-css', 'build-vendor-css', 'copy-html', 'copy-readme', 'watch', 'connect']);
 
 gulp.task('dist', ['build-js', 'build-vendor-js', 'build-css', 'build-vendor-css', 'copy-html', 'copy-readme']);
