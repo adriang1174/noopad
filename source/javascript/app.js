@@ -62,7 +62,7 @@
 
         hotkeys.add({
           combo: ['command+s', 'ctrl+s'],
-          description: 'Description goes here',
+          description: 'Save file',
           callback: function(event) {
             vm.saveFile();
             event.preventDefault();
