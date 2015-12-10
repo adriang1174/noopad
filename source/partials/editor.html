@@ -3,7 +3,7 @@
         <button type="button" dropdown-toggle class="btn btn-default">Select File</button>
         <ul class="dropdown-menu">
             <li ng-repeat="file in editorCtrl.files">
-                <a ng-href="{{file | editorUrl}}" ng-click="editorCtrl.getFile(file)">{{file}}</a>
+                <a ng-href="{{file | editorUrl}}" ng-click="editorCtrl.readFile(file)">{{file}}</a>
             </li>
         </ul>
     </div>

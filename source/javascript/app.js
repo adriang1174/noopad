@@ -69,6 +69,12 @@
           }
         });
 
+        function logoff() {
+            localStorage.removeItem(noopadKey);
+            Dropbox.setCredentials('');
+            $location.path('/login');
+        }
+
         function getAccount() {
             Dropbox.accountInfo().then(function (accountInfo) {
                 $toast.show('Logged in as ' + accountInfo.display_name);
@@ -78,27 +84,7 @@
             });
         }
 
-        function setupEditor() {
-            if (localStorage[noopadKey]) {
-                var oauth = angular.fromJson(localStorage[noopadKey]);
-                Dropbox.setCredentials(oauth);
-                getAccount();
-                if ($location.search().f) {
-                    var dropboxName = '/' + $window.decodeURIComponent($location.search().f);
-                    getFile(dropboxName);
-                }
-            } else {
-                $location.path('/login');
-            }
-        }
-
-        function logoff() {
-            localStorage.removeItem(noopadKey);
-            Dropbox.setCredentials('');
-            $location.path('/login');
-        }
-
-        function getFile(filename) {
+        function readFile(filename) {
             Dropbox.readFile(filename).then(function success(filedata) {
                 vm.content = {
                     title: filename,
@@ -115,9 +101,23 @@
             });
         }
 
+        function setupEditor() {
+            if (localStorage[noopadKey]) {
+                var oauth = angular.fromJson(localStorage[noopadKey]);
+                Dropbox.setCredentials(oauth);
+                getAccount();
+                if ($location.search().f) {
+                    var dropboxName = '/' + $window.decodeURIComponent($location.search().f);
+                    readFile(dropboxName);
+                }
+            } else {
+                $location.path('/login');
+            }
+        }
+
         setupEditor();
 
-        vm.getFile = getFile;
+        vm.readFile = readFile;
         vm.logoff = logoff;
         vm.saveFile = saveFile;
     });
