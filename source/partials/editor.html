@@ -16,3 +16,16 @@
     <textarea materialize-textarea="true" ng-model="editorCtrl.content.body">
     </textarea>
 </article>
+
+
+    <flipper flipped="editorCtrl.flipped" horizontal>
+        <front>
+            the front!
+        </front>
+        <back>
+            the back!
+        </back>
+    </flipper>
+
+<button type="button" class="save-button btn btn-default" ng-click="editorCtrl.flip()">Flip</button>
+

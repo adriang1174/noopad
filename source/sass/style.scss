@@ -74,3 +74,92 @@ article {
     }
 
 }
+
+.tile { color:white; padding:15px; box-sizing:border-box; -moz-box-sizing:border-box; }
+        
+flipper {
+    float:left;
+    width:250px;
+    height:250px;
+    margin-right:15px;
+    display:block;
+    -webkit-perspective:1000;
+    
+    span {
+        color:white;
+    }
+    
+    >div.flipper {
+        float:left;
+        width:100%;
+        height:100%;
+        position:relative;
+        -webkit-transform-style:preserve-3d;
+        
+        .front, .back {
+            float:left;
+            display:block;
+            width:100%;
+            height:100%;
+            -webkit-backface-visibility:hidden;
+            position:absolute;
+            top:0;
+            left:0;
+            -webkit-transform-style:preserve-3d;
+            -webkit-transition:transform ease 500ms;
+        }
+
+        .front {
+            z-index:2;
+            background:#19489E;
+
+            /* front tile styles go here! */
+        }
+
+        .back {
+            background:#9E1919;
+
+            /* back tile styles go here! */
+        }
+    }
+}
+
+flipper[horizontal] {
+    .front {
+        -webkit-transform:rotateY(0deg);
+    }
+
+    .back {
+        -webkit-transform:rotateY(-180deg);
+    }
+
+    div.flipper.flipped {
+        .front {
+            -webkit-transform:rotateY(180deg);
+        }
+
+        .back {
+            -webkit-transform:rotateY(0deg);
+        }
+    }
+}
+
+flipper[vertical] {
+    .front {
+        -webkit-transform:rotateX(0deg);
+    }
+
+    .back {
+        -webkit-transform:rotateX(-180deg);
+    }
+
+    div.flipper.flipped {
+        .front {
+            -webkit-transform:rotateX(180deg);
+        }
+
+        .back {
+            -webkit-transform:rotateX(0deg);
+        }
+    }
+}

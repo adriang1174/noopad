@@ -35,6 +35,33 @@
         };
     });
 
+    app.directive('flipper', function () {
+        return {
+            restrict: 'E',
+            template: '<div class="flipper" ng-transclude ng-class="{ flipped: flipped }"></div>',
+            transclude: true,
+            scope: {
+                flipped: '='
+            }
+        };
+    });
+
+    app.directive('front', function() {
+        return {
+            restrict: 'E',
+            template: '<div class="front tile" ng-transclude></div>',
+            transclude: true
+        };
+    });
+
+    app.directive('back', function() {
+        return {
+            restrict: 'E',
+            template: '<div class="back tile" ng-transclude></div>',
+            transclude: true
+        };
+    });
+
     app.controller('loginController', function ($location, $toast, $window, Dropbox, noopadKey) {
         var vm = this;
 
@@ -115,8 +142,15 @@
             }
         }
 
+        function flip() {
+            vm.flipped = !vm.flipped;
+        }
+
+
         setupEditor();
 
+        vm.flipped = false;
+        vm.flip = flip;
         vm.readFile = readFile;
         vm.logoff = logoff;
         vm.saveFile = saveFile;
