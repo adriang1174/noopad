@@ -11,21 +11,23 @@
     <button type="button" class="save-button btn btn-default" ng-click="editorCtrl.saveFile()">Save</button>
     <button type="button" class="logoff-button btn btn-default" ng-click="editorCtrl.logoff()">Logoff</button>
 </div>
-<article>
-    <h1>{{editorCtrl.content.title}}</h1>
-    <textarea materialize-textarea="true" ng-model="editorCtrl.content.body">
-    </textarea>
-</article>
 
+
+<article>
 
     <flipper flipped="editorCtrl.flipped" horizontal>
         <front>
-            the front!
+    <h1>{{editorCtrl.content.title}}</h1>
+    <textarea materialize-textarea="true" ng-model="editorCtrl.content.body">
+    </textarea>
+
         </front>
         <back>
-            the back!
+            MD goes here.
         </back>
     </flipper>
+</article>
+
 
 <button type="button" class="save-button btn btn-default" ng-click="editorCtrl.flip()">Flip</button>
 
