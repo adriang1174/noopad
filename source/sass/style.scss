@@ -32,11 +32,10 @@ article {
     min-height: 100%;
     height: auto !important;
     height: 100%;
+
     /* negative indent footer by its height */
-    
     margin: 0 auto -120px;
     /* pad bottom by footer height */
-    
     padding: 0 0 120px;
     background-color: $background-color;
 
@@ -48,77 +47,77 @@ article {
 
     .create-button {
         @include span-columns(3);
-        /*background-color: yellow;*/
     }
  
     .save-button {
         @include span-columns(3);
-        /*background-color: orange;*/
     }
 
     .files-dropdown {
         @include span-columns(3);
-        /*background-color: blue;*/
     }
 
     .logon-button {
         @include span-columns(8);
         @include omega();
-        /*background-color: orange;*/
     }
 
     .logoff-button {
         @include span-columns(3);
         @include omega();
-        /*background-color: orange;*/
     }
-
 }
 
-.tile { color:white; padding:15px; box-sizing:border-box; -moz-box-sizing:border-box; }
+.tile { 
+    color: white;
+    padding: 15px;
+    -webkit-box-sizing: border-box; 
+    -moz-box-sizing: border-box;
+}
         
 flipper {
-    float:left;
-    width:250px;
-    height:250px;
-    margin-right:15px;
-    display:block;
-    -webkit-perspective:1000;
+    /*float:left;*/
+    /*width:250px;*/
+    /*height:250px;*/
+    margin-right: 15px;
+    display: block;
+    -webkit-perspective: 1000;
     
     span {
-        color:white;
+        color: white;
     }
     
     >div.flipper {
-        float:left;
-        width:100%;
-        height:100%;
-        position:relative;
-        -webkit-transform-style:preserve-3d;
+        /*float: left;*/
+        width: 100%;
+        height: 100%;
+        position: relative;
+        -webkit-transform-style: preserve-3d;
         
         .front, .back {
-            float:left;
-            display:block;
-            width:100%;
-            height:100%;
-            -webkit-backface-visibility:hidden;
-            position:absolute;
-            top:0;
-            left:0;
-            -webkit-transform-style:preserve-3d;
-            -webkit-transition:transform ease 500ms;
+            /* debug */
+            border:  1px dotted;
+
+            /*float: left;*/
+            display: block;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            -webkit-transform-style: preserve-3d;
+            -webkit-transition: transform ease 500ms;
         }
 
         .front {
-            z-index:2;
-            background:#19489E;
-
+            z-index: 2;
+            /*background: #19489E;*/
             /* front tile styles go here! */
         }
 
         .back {
-            background:#9E1919;
-
+            /*background: #9E1919;*/
             /* back tile styles go here! */
         }
     }
@@ -126,40 +125,20 @@ flipper {
 
 flipper[horizontal] {
     .front {
-        -webkit-transform:rotateY(0deg);
+        -webkit-transform: rotateY(0deg);
     }
 
     .back {
-        -webkit-transform:rotateY(-180deg);
+        -webkit-transform: rotateY(-180deg);
     }
 
     div.flipper.flipped {
         .front {
-            -webkit-transform:rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
         }
 
         .back {
-            -webkit-transform:rotateY(0deg);
-        }
-    }
-}
-
-flipper[vertical] {
-    .front {
-        -webkit-transform:rotateX(0deg);
-    }
-
-    .back {
-        -webkit-transform:rotateX(-180deg);
-    }
-
-    div.flipper.flipped {
-        .front {
-            -webkit-transform:rotateX(180deg);
-        }
-
-        .back {
-            -webkit-transform:rotateX(0deg);
+            -webkit-transform: rotateY(0deg);
         }
     }
 }

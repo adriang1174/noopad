@@ -12,22 +12,23 @@
     <button type="button" class="logoff-button btn btn-default" ng-click="editorCtrl.logoff()">Logoff</button>
 </div>
 
-
 <article>
-
     <flipper flipped="editorCtrl.flipped" horizontal>
         <front>
-    <h1>{{editorCtrl.content.title}}</h1>
-    <textarea materialize-textarea="true" ng-model="editorCtrl.content.body">
-    </textarea>
-
+            <h1>{{editorCtrl.content.title}}</h1>
+            <textarea materialize-textarea="true" ng-model="editorCtrl.content.body">
+            </textarea>
         </front>
         <back>
-            MD goes here.
+              MD goes here.
+              Lalalalal.<br>
+              <br>
+              <p>
+                test
+              </p>
         </back>
     </flipper>
 </article>
-
 
 <button type="button" class="save-button btn btn-default" ng-click="editorCtrl.flip()">Flip</button>
 
