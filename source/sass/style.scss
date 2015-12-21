@@ -72,7 +72,6 @@ article {
     color: white;
     padding: 15px;
     -webkit-box-sizing: border-box; 
-    -moz-box-sizing: border-box;
 }
         
 flipper {
@@ -96,7 +95,7 @@ flipper {
         
         .front, .back {
             /* debug */
-            border:  1px dotted;
+            /*border:  1px dotted;*/
 
             /*float: left;*/
             display: block;
@@ -129,12 +128,12 @@ flipper[horizontal] {
     }
 
     .back {
-        -webkit-transform: rotateY(-180deg);
+        -webkit-transform: rotateY(180deg);
     }
 
     div.flipper.flipped {
         .front {
-            -webkit-transform: rotateY(180deg);
+            -webkit-transform: rotateY(-180deg);
         }
 
         .back {
