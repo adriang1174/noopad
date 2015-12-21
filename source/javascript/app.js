@@ -28,6 +28,12 @@
             });
     });
 
+    app.config(['markedProvider', function (markedProvider) {
+        markedProvider.setOptions({ 
+            gfm: true 
+        });
+    }]);
+
     app.filter('editorUrl', function ($window) {
         return function (url) {
             var noSlashUrl = url.substring(1);
@@ -145,8 +151,8 @@
 
         function flip() {
             vm.flipped = !vm.flipped;
+            vm.content.markdownBody = marked(vm.content.body);
         }
-
 
         setupEditor();
 
