@@ -27,6 +27,7 @@ var gulp = require('gulp'),
                             'bower_components/angular-animate/angular-animate.js',
                             'bower_components/waves/dist/waves.js',
                             'bower_components/angular-hotkeys/build/hotkeys.js',
+                            'bower_components/marked/lib/marked.js',
                             'bower_components/angular-marked/dist/angular-marked.js'
                         ],
         'config': 'noopad.config'
