@@ -2,7 +2,7 @@
 (function () {
     'use strict';
 
-    var app = angular.module('noopad', ['dropbox', 'noopad.config', 'ngMaterialize', 'ngRoute', 'cfp.hotkeys']);
+    var app = angular.module('noopad', ['dropbox', 'noopad.config', 'ngMaterialize', 'ngRoute', 'cfp.hotkeys', 'hc.marked']);
 
     app.constant('noopadKey', 'noopad.oauth');
 
@@ -84,7 +84,7 @@
         }
     });
 
-    app.controller('editorController', function (Dropbox, $window, $toast, $location, noopadKey, hotkeys) {
+    app.controller('editorController', function (Dropbox, $window, $toast, $location, noopadKey, hotkeys, marked) {
         var vm = this;
 
         hotkeys.add({
@@ -115,7 +115,8 @@
             Dropbox.readFile(filename).then(function success(filedata) {
                 vm.content = {
                     title: filename,
-                    body: filedata
+                    body: filedata,
+                    markdownBody: marked(filedata)
                 };
             });
         }

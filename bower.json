@@ -11,7 +11,8 @@
     "ng-materialize": "0.1.2",
     "neat": "~1.7.2",
     "bourbon": "~4.2.6",
-    "angular-hotkeys": "chieffancypants/angular-hotkeys#~1.6.0"
+    "angular-hotkeys": "chieffancypants/angular-hotkeys#~1.6.0",
+    "angular-marked": "~1.0.1"
   },
   "resolutions": {
     "angular": "1.4.7"
