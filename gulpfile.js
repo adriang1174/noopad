@@ -47,7 +47,7 @@ gulp.task('jshint', function () {
 });
 
 gulp.task('build-js', function () {
-    // if (!exist /source/javascript/config.js) {
+    // if (!exist /source/config.js) {
     //     configure();   
     // }
     return gulp.src(input.javascript)
@@ -118,14 +118,14 @@ function configure() {
         .pipe(gulpNgConfig(input.config, {
             environment: gutil.env.type
         }))
-        .pipe(gulp.dest('source/javascript'));
+        .pipe(gulp.dest('source'));
 }
 
-// This generates source/javascript/config.js
+// This generates source/config.js
 gulp.task('configure', configure);
 
 function clean() {
-    del([output.dist, 'source/javascript/config.js']);
+    del([output.dist, 'source/config.js']);
 }
 
 gulp.task('clean', clean);
