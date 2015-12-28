@@ -4,7 +4,7 @@
 node_modules*
 bower_components*
 dist
-
+todo
 deploy_noosphaere.sh
 
 source/config.js
