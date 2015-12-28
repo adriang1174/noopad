@@ -1,7 +1,7 @@
 /*jshint camelcase: false */
 (function () {
     'use strict';
-    
+
     var app = angular.module('noopad', ['dropbox', 'noopad.config', 'ngMaterialize', 'ngRoute', 'cfp.hotkeys', 'hc.marked']);
 
     app.constant('noopadKey', 'noopad.oauth');
@@ -28,11 +28,11 @@
             });
     });
 
-    app.config(['markedProvider', function (markedProvider) {
+    app.config(function (markedProvider) {
         markedProvider.setOptions({ 
             gfm: true 
         });
-    }]);
+    });
 
     app.filter('editorUrl', function ($window) {
         return function (url) {
