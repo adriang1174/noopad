@@ -9,7 +9,7 @@
     </div>
     <button type="button" class="create-button btn btn-default" ng-click="editorCtrl.resetForm()">New</button>
     <button type="button" class="save-button btn btn-default" ng-click="editorCtrl.save()">Save</button>
-    <button type="button" class="delete-button btn btn-default" ink ink-color="red" ng-click="editorCtrl.deleteFile()">Delete</button>
+    <button type="button" class="delete-button btn btn-default" ink ink-color="red" ng-click="editorCtrl.confirmDelete($event)">Delete</button>
     <button type="button" class="logoff-button btn btn-default" ng-click="editorCtrl.logoff()">Logoff</button>
 </div>
 

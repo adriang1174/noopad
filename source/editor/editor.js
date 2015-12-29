@@ -3,7 +3,8 @@
     'use strict';
 
     var app = angular.module('noopad');
-    app.controller('editorController', function (Dropbox, $window, $toast, $location, noopadKey, hotkeys, marked) {
+    
+    app.controller('editorController', function (Dropbox, $window, $modal, $toast, $location, noopadKey, hotkeys, marked) {
         var vm = this;
 
         hotkeys.add({
@@ -54,6 +55,15 @@
             }
         }
 
+        function resetForm() {
+            vm.content = {
+                title: '',
+                body: '',
+                markdownBody: ''
+            };
+            vm.contentForm.title.$setDirty();             
+        }
+
         function deleteFile() {
             var filename = vm.content.title;
             Dropbox.delete(filename).then(function success() {
@@ -62,13 +72,13 @@
             });
         }
 
-        function resetForm() {
-            vm.content = {
-                title: '',
-                body: '',
-                markdownBody: ''
-            };
-            vm.contentForm.title.$setDirty();             
+        function confirmDelete($event) {
+            var modalInstance = $modal.open({
+                templateUrl: 'editor/confirmDelete.html',
+                anchorElement: $event ? angular.element($event.target) : undefined,
+                controller: 'confirmDeleteCtrl',
+            });
+            modalInstance.result.then(deleteFile);
         }
 
         function flip() {
@@ -98,7 +108,6 @@
         vm.logoff = logoff;
         vm.save = save;
         vm.resetForm = resetForm;
-        vm.deleteFile = deleteFile;
+        vm.confirmDelete = confirmDelete;
     });
-
 })();
