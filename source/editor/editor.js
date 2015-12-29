@@ -1,7 +1,7 @@
 /*jshint camelcase: false */
 (function () {
     'use strict';
-    
+
     var app = angular.module('noopad');
     app.controller('editorController', function (Dropbox, $window, $toast, $location, noopadKey, hotkeys, marked) {
         var vm = this;
@@ -10,7 +10,7 @@
           combo: ['command+s', 'ctrl+s'],
           description: 'Save file',
           callback: function(event) {
-            vm.saveFile();
+            vm.save();
             event.preventDefault();
           }
         });
@@ -40,12 +40,17 @@
             });
         }
 
-        function saveFile() {
+        function save() {
             var filename = vm.content.title,
                 body = vm.content.body;
-            Dropbox.writeFile(filename, body).then(function success() {
-                $toast.show('Saved ' + filename);
-            });
+            if (vm.contentForm.$valid) {
+                Dropbox.writeFile(filename, body).then(function success() {
+                    $toast.show('Saved ' + filename);
+                    Dropbox.readdir('/').then(function success(entries) {
+                        vm.files = entries;
+                    });
+                });                
+            } 
         }
 
         function setupEditor() {
@@ -73,7 +78,7 @@
         vm.flip = flip;
         vm.readFile = readFile;
         vm.logoff = logoff;
-        vm.saveFile = saveFile;
+        vm.save = save;
     });
 
 })();
