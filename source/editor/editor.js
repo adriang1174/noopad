@@ -21,12 +21,16 @@
             $location.path('/login');
         }
 
+        function refresh(message) {
+            $toast.show(message);
+            Dropbox.readdir('/').then(function success(entries) {
+                vm.files = entries;
+            });
+        }
+
         function getAccount() {
             Dropbox.accountInfo().then(function (accountInfo) {
-                $toast.show('Logged in as ' + accountInfo.display_name);
-                Dropbox.readdir('/').then(function success(entries) {
-                    vm.files = entries;
-                });
+                refresh('Logged in as ' + accountInfo.display_name);
             });
         }
 
@@ -45,12 +49,17 @@
                 body = vm.content.body;
             if (vm.contentForm.$valid) {
                 Dropbox.writeFile(filename, body).then(function success() {
-                    $toast.show('Saved ' + filename);
-                    Dropbox.readdir('/').then(function success(entries) {
-                        vm.files = entries;
-                    });
+                    refresh('Saved ' + filename);
                 });                
             }
+        }
+
+        function deleteFile() {
+            var filename = vm.content.title;
+            Dropbox.delete(filename).then(function success() {
+                refresh('Deleted ' + filename);
+                resetForm();
+            });
         }
 
         function resetForm() {
@@ -60,6 +69,11 @@
                 markdownBody: ''
             };
             vm.contentForm.title.$setDirty();             
+        }
+
+        function flip() {
+            vm.flipped = !vm.flipped;
+            vm.content.markdownBody = marked(vm.content.body);
         }
 
         function setupEditor() {
@@ -76,11 +90,6 @@
             }
         }
 
-        function flip() {
-            vm.flipped = !vm.flipped;
-            vm.content.markdownBody = marked(vm.content.body);
-        }
-
         setupEditor();
 
         vm.flipped = false;
@@ -89,6 +98,7 @@
         vm.logoff = logoff;
         vm.save = save;
         vm.resetForm = resetForm;
+        vm.deleteFile = deleteFile;
     });
 
 })();

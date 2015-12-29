@@ -45,21 +45,25 @@ article {
         @include span-columns(3);
     }
  
+    .delete-button {
+        @include span-columns(2);
+    }
+ 
     .save-button {
         @include span-columns(3);
     }
 
     .files-dropdown {
-        @include span-columns(3);
+        @include span-columns(2);
+    }
+
+    .logoff-button {
+        @include span-columns(2);
+        @include omega();
     }
 
     .logon-button {
         @include span-columns(8);
-        @include omega();
-    }
-
-    .logoff-button {
-        @include span-columns(3);
         @include omega();
     }
 }
