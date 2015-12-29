@@ -50,7 +50,16 @@
                         vm.files = entries;
                     });
                 });                
-            } 
+            }
+        }
+
+        function resetForm() {
+            vm.content = {
+                title: '',
+                body: '',
+                markdownBody: ''
+            };
+            vm.contentForm.title.$setDirty();             
         }
 
         function setupEditor() {
@@ -79,6 +88,7 @@
         vm.readFile = readFile;
         vm.logoff = logoff;
         vm.save = save;
+        vm.resetForm = resetForm;
     });
 
 })();
