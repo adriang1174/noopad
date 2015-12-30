@@ -3,7 +3,7 @@
     'use strict';
 
     var app = angular.module('noopad');
-    
+
     app.controller('editorController', function (Dropbox, $window, $modal, $toast, $location, noopadKey, hotkeys, marked) {
         var vm = this;
 
@@ -74,7 +74,7 @@
 
         function confirmDelete($event) {
             var modalInstance = $modal.open({
-                templateUrl: 'editor/confirmDelete.html',
+                templateUrl: 'modals/confirmDelete.html',
                 anchorElement: $event ? angular.element($event.target) : undefined,
                 controller: 'confirmDeleteCtrl',
             });
