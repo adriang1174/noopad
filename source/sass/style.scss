@@ -19,11 +19,10 @@ body {
     @include outer-container;
 
     min-height: 100%;
-    height: auto !important;
-    height: 100%;
 
     /* negative indent footer by its height */
     margin: 0 auto -120px;
+
     /* pad bottom by footer height */
     padding: 0 0 120px;
     background-color: $background-color;
@@ -65,21 +64,12 @@ body {
         @include span-columns(6);
     }
 
-
     article {
         @include span-columns(12);
         border: 1px dotted;
         padding: 0 10px 0 10px;
         color: $article-font-color;
-        /*overflow: hidden;*/
     }
-
-/*   article:after{
-    clear: both;
-    content: "";
-    display: block; 
-    }
-*/
 }
 
 .input-field .title {
@@ -93,7 +83,6 @@ body {
 }
         
 flipper {
-    /*float: left;*/
     margin-right: 15px;
     display: block;
     -webkit-perspective: 1000;
@@ -103,7 +92,6 @@ flipper {
     }
     
     >div.flipper {
-        /*float: left;*/
         width: 100%;
         height: 100%;
         position: relative;
@@ -112,12 +100,10 @@ flipper {
         .front, .back {
             /* debug */
             /*border:  1px dotted;*/
-            /*float: left;*/
             display: block;
             width: 100%;
             height: 100%;
             -webkit-backface-visibility: hidden;
-            position: absolute;
             top: 0;
             left: 0;
             -webkit-transform-style: preserve-3d;
@@ -133,6 +119,7 @@ flipper {
         .back {
             /*background: #9E1919;*/
             /* back tile styles go here! */
+            display: none;
         }
     }
 }
@@ -149,10 +136,12 @@ flipper[horizontal] {
     div.flipper.flipped {
         .front {
             -webkit-transform: rotateY(-180deg);
+            display: none;
         }
 
         .back {
             -webkit-transform: rotateY(0deg);
+            display: block;
         }
     }
 }
