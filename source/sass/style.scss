@@ -87,52 +87,72 @@ flipper {
         width: 100%;
         height: 100%;
         position: relative;
-        -webkit-transform-style: preserve-3d;
+        /*-webkit-transform-style: preserve-3d;*/
         
         .front, .back {
             /*border:  1px dotted;*/
             display: block;
             width: 100%;
             height: 100%;
-            -webkit-backface-visibility: hidden;
+            /*-webkit-backface-visibility: hidden;*/
             top: 0;
             left: 0;
-            -webkit-transform-style: preserve-3d;
-            -webkit-transition: transform ease 200ms;
+            /*-webkit-transform-style: preserve-3d;*/
+            /*-webkit-transition: transform ease 200ms;*/
         }
 
         .front {
             z-index: 2;
             /*background: #19489E;*/
             /* front tile styles go here! */
+            position: relative;
+            visibility: visible;
+            opacity: 1;
+            -webkit-transition: visibility 0s, opacity 0.5s linear;
         }
 
         .back {
             /*background: #9E1919;*/
             /* back tile styles go here! */
-            display: none;
+            /*display: none;*/
+            top: 0;
+            left: 0;
+            position: absolute;
+            visibility: hidden;
+            opacity: 0;
+            -webkit-transition: visibility 0s, opacity 0.5s linear;
         }
     }
 }
 
 flipper[horizontal] {
     .front {
-        -webkit-transform: rotateY(0deg);
+        /*-webkit-transform: rotateY(0deg);*/
     }
 
     .back {
-        -webkit-transform: rotateY(180deg);
+        /*-webkit-transform: rotateY(180deg);*/
     }
 
     div.flipper.flipped {
         .front {
-            -webkit-transform: rotateY(-180deg);
-            display: none;
+            /*-webkit-transform: rotateY(-180deg);*/
+            /*display: none;*/
+            top: 0;
+            left: 0;
+            position: absolute;
+            visibility: hidden;
+            opacity: 0;
+            -webkit-transition: visibility 0s, opacity 0.5s linear;
         }
 
         .back {
-            -webkit-transform: rotateY(0deg);
-            display: block;
+            /*-webkit-transform: rotateY(0deg);*/
+            position: relative;
+            visibility: visible;
+            opacity: 1;
+            -webkit-transition: visibility 0s, opacity 0.5s linear;
+            /*display: block;*/
         }
     }
 }
