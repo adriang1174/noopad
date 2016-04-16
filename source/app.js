@@ -15,12 +15,12 @@
             .when('/login', {
                 templateUrl: 'login/login.html',
                 controller: 'loginController',
-                controllerAs: 'loginCtrl'
+                controllerAs: 'vm'
             })
             .when('/editor', {
                 templateUrl: 'editor/editor.html',
                 controller: 'editorController',
-                controllerAs: 'editorCtrl',
+                controllerAs: 'vm',
                 reloadOnSearch: false
             })
             .otherwise({

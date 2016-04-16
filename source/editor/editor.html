@@ -2,35 +2,35 @@
     <div dropdown class="files-dropdown">
         <button type="button" dropdown-toggle class="btn btn-default">Select File</button>
         <ul class="dropdown-menu">
-            <li ng-repeat="file in editorCtrl.files">
-                <a ng-href="{{file | editorUrl}}" ng-click="editorCtrl.readFile(file)">{{file}}</a>
+            <li ng-repeat="file in vm.files">
+                <a ng-href="{{file | editorUrl}}" ng-click="vm.readFile(file)">{{file}}</a>
             </li>
         </ul>
     </div>
-    <button type="button" class="create-button btn btn-default" ng-click="editorCtrl.resetForm()">New</button>
-    <button type="button" class="save-button btn btn-default" ng-click="editorCtrl.save()">Save</button>
-    <button type="button" class="delete-button btn btn-default" ink ink-color="red" ng-click="editorCtrl.confirmDelete($event)">Delete</button>
-    <button type="button" class="logoff-button btn btn-default" ng-click="editorCtrl.logoff()">Logoff</button>
+    <button type="button" class="create-button btn btn-default" ng-click="vm.resetForm()">New</button>
+    <button type="button" class="save-button btn btn-default" ng-click="vm.save()">Save</button>
+    <button type="button" class="delete-button btn btn-default" ink ink-color="red" ng-click="vm.confirmDelete($event)">Delete</button>
+    <button type="button" class="logoff-button btn btn-default" ng-click="vm.logoff()">Logoff</button>
 </div>
 
 <article>
-    <flipper flipped="editorCtrl.flipped" horizontal>
+    <flipper flipped="vm.flipped" horizontal>
         <front>
-            <form name="editorCtrl.contentForm" ng-submit="editorCtrl.save()" novalidate>
+            <form name="vm.contentForm" ng-submit="vm.save()" novalidate>
             <div class="input-field">
-                <input name="title" class="title validate ignore-success" type="text" ng-model="editorCtrl.content.title" required floating-label="filename"/>       
+                <input name="title" class="title validate ignore-success" type="text" ng-model="vm.content.title" required floating-label="filename"/>       
             </div>
             <div class="input-field">
-                <textarea floating-label="content" materialize-textarea="true" ng-model="editorCtrl.content.body">
+                <textarea floating-label="content" materialize-textarea="true" ng-model="vm.content.body">
                 </textarea>
                 </div>
             </form>
         </front>
         <back>
-            <div marked="editorCtrl.content.markdownBody"></div>
+            <div marked="vm.content.markdownBody"></div>
         </back>
     </flipper>
 </article>
 
-<button type="button" class="flip-button btn btn-default" ng-click="editorCtrl.flip()">View Markdown</button>
+<button type="button" class="flip-button btn btn-default" ng-click="vm.flip()">View Markdown</button>
 
