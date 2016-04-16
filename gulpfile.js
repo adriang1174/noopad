@@ -10,6 +10,7 @@ var gulp = require('gulp'),
     del = require('del'),
     connect = require('gulp-connect'),
     flatten = require('gulp-flatten'),
+    rename = require('gulp-rename'),
 
     input = {
         'html':         'source/**/*.html',
@@ -75,6 +76,7 @@ gulp.task('build-css', function () {
         .pipe(sass().on('error', sass.logError))
         //.pipe(sourcemaps.write())
         .pipe(flatten())
+        .pipe(rename('noopad.css'))
         .pipe(gulp.dest(output.stylesheets));
 });
 

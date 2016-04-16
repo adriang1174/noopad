@@ -21,7 +21,8 @@
     "del": "^2.0.2",
     "gulp-sass": "^2.1.0",
     "gulp-connect": "^2.2.0",
-    "gulp-flatten": "0.2.0"
+    "gulp-flatten": "0.2.0",
+    "gulp-rename": "1.2.2"
   },
   "scripts": {
     "postinstall": "bower install",
