@@ -1,24 +1,5 @@
-@import "../../bower_components/bourbon/app/assets/stylesheets/bourbon";
-@import "../../bower_components/neat/app/assets/stylesheets/neat";
-
-@import "../login/login";
-
-$background-color: #3b3b3b;
-$article-font-color: white;
-
-html,
-body {
-    height: 100%; 
-    background: $background-color;
-}
-
-.container {
-    @include outer-container;
-
-    min-height: 100%;
-    margin: 0 auto -120px;
-    padding: 0 0 120px;
-    background-color: $background-color;
+.editor {
+    @extend .container;
 
     .menu {
         height: 35px;
@@ -57,10 +38,9 @@ body {
 
         /*border: 1px dotted;*/
         padding: 0 10px 0 10px;
-        color: $article-font-color;
     }
-}
 
+    
 .input-field .title {
     font-size: 35px;
 }
@@ -130,4 +110,6 @@ flipper[horizontal] {
             -webkit-transition: visibility 0s, opacity 0.5s linear;
         }
     }
+}
+
 }
