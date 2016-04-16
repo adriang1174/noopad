@@ -86,25 +86,18 @@ flipper {
     >div.flipper {
         width: 100%;
         height: 100%;
-        position: relative;
-        /*-webkit-transform-style: preserve-3d;*/
-        
+        position: relative;        
         .front, .back {
             /*border:  1px dotted;*/
             display: block;
             width: 100%;
             height: 100%;
-            /*-webkit-backface-visibility: hidden;*/
             top: 0;
             left: 0;
-            /*-webkit-transform-style: preserve-3d;*/
-            /*-webkit-transition: transform ease 200ms;*/
         }
 
         .front {
             z-index: 2;
-            /*background: #19489E;*/
-            /* front tile styles go here! */
             position: relative;
             visibility: visible;
             opacity: 1;
@@ -112,9 +105,6 @@ flipper {
         }
 
         .back {
-            /*background: #9E1919;*/
-            /* back tile styles go here! */
-            /*display: none;*/
             top: 0;
             left: 0;
             position: absolute;
@@ -126,18 +116,8 @@ flipper {
 }
 
 flipper[horizontal] {
-    .front {
-        /*-webkit-transform: rotateY(0deg);*/
-    }
-
-    .back {
-        /*-webkit-transform: rotateY(180deg);*/
-    }
-
     div.flipper.flipped {
         .front {
-            /*-webkit-transform: rotateY(-180deg);*/
-            /*display: none;*/
             top: 0;
             left: 0;
             position: absolute;
@@ -147,12 +127,10 @@ flipper[horizontal] {
         }
 
         .back {
-            /*-webkit-transform: rotateY(0deg);*/
             position: relative;
             visibility: visible;
             opacity: 1;
             -webkit-transition: visibility 0s, opacity 0.5s linear;
-            /*display: block;*/
         }
     }
 }
