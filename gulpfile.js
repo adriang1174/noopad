@@ -12,7 +12,7 @@ var gulp = require('gulp'),
 
     input = {
         'html':         'source/**/*.html',
-        'sass':         'source/sass/**/*.scss',
+        'sass':         'source/**/*.scss',
         'javascript':   'source/**/*.js',
         'vendor_css':   [
                             'bower_components/ng-materialize/dist/ng-materialize.min.css',

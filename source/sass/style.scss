@@ -1,6 +1,8 @@
 @import "../../bower_components/bourbon/app/assets/stylesheets/bourbon";
 @import "../../bower_components/neat/app/assets/stylesheets/neat";
 
+@import "../login/login";
+
 $background-color: #3b3b3b;
 $article-font-color: white;
 
@@ -45,8 +47,9 @@ body {
         @include omega();
     }
 
-    .logon-button {
-        @include span-columns(8);
+    .login-button {
+        @include shift(3);
+        @include span-columns(6);
         @include omega();
     }
 
