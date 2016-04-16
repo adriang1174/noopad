@@ -9,6 +9,7 @@ var gulp = require('gulp'),
     print = require('gulp-print'),
     del = require('del'),
     connect = require('gulp-connect'),
+    flatten = require('gulp-flatten'),
 
     input = {
         'html':         'source/**/*.html',
@@ -73,6 +74,7 @@ gulp.task('build-css', function () {
         //.pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         //.pipe(sourcemaps.write())
+        .pipe(flatten())
         .pipe(gulp.dest(output.stylesheets));
 });
 

@@ -47,12 +47,6 @@ body {
         @include omega();
     }
 
-    .login-button {
-        @include shift(3);
-        @include span-columns(6);
-        @include omega();
-    }
-
     .flip-button {
         @include shift(3);
         @include span-columns(6);
