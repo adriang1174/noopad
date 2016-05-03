@@ -1,0 +1,145 @@
+html {
+  box-sizing: border-box; }
+
+*, *::after, *::before {
+  box-sizing: inherit; }
+
+.login .login-button {
+  margin-left: 25.58941%;
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 48.82117%;
+  margin-right: 0;
+  height: 120px;
+  border-radius: 10px; }
+  .login .login-button:last-child {
+    margin-right: 0; }
+
+.editor .menu {
+  height: 35px;
+  margin-bottom: 40px; }
+
+.editor .create-button {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 23.23176%; }
+  .editor .create-button:last-child {
+    margin-right: 0; }
+
+.editor .delete-button {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 14.70196%; }
+  .editor .delete-button:last-child {
+    margin-right: 0; }
+
+.editor .save-button {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 23.23176%; }
+  .editor .save-button:last-child {
+    margin-right: 0; }
+
+.editor .files-dropdown {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 14.70196%; }
+  .editor .files-dropdown:last-child {
+    margin-right: 0; }
+
+.editor .logoff-button {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 14.70196%;
+  margin-right: 0; }
+  .editor .logoff-button:last-child {
+    margin-right: 0; }
+
+.editor .flip-button {
+  margin-left: 25.58941%;
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 48.82117%; }
+  .editor .flip-button:last-child {
+    margin-right: 0; }
+
+.editor article {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 100%;
+  /*border: 1px dotted;*/
+  padding: 0 10px 0 10px; }
+  .editor article:last-child {
+    margin-right: 0; }
+
+.editor .input-field .title {
+  font-size: 35px; }
+
+.editor .tile {
+  color: white;
+  padding: 15px;
+  -webkit-box-sizing: border-box; }
+
+.editor flipper {
+  margin-right: 15px;
+  display: block;
+  -webkit-perspective: 1000; }
+  .editor flipper span {
+    color: white; }
+  .editor flipper > div.flipper {
+    width: 100%;
+    height: 100%;
+    position: relative; }
+    .editor flipper > div.flipper .front, .editor flipper > div.flipper .back {
+      /*border:  1px dotted;*/
+      display: block;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0; }
+    .editor flipper > div.flipper .front {
+      z-index: 2;
+      position: relative;
+      visibility: visible;
+      opacity: 1;
+      -webkit-transition: visibility 0s, opacity 0.5s linear; }
+    .editor flipper > div.flipper .back {
+      top: 0;
+      left: 0;
+      position: absolute;
+      visibility: hidden;
+      opacity: 0;
+      -webkit-transition: visibility 0s, opacity 0.5s linear; }
+
+.editor flipper[horizontal] div.flipper.flipped .front {
+  top: 0;
+  left: 0;
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: visibility 0s, opacity 0.5s linear; }
+
+.editor flipper[horizontal] div.flipper.flipped .back {
+  position: relative;
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: visibility 0s, opacity 0.5s linear; }
+
+html,
+body {
+  height: 100%;
+  background: #3b3b3b; }
+
+.container, .login, .editor {
+  min-height: 100%;
+  margin: 0 auto -120px;
+  padding: 15px 0 0 0;
+  background-color: #3b3b3b; }
