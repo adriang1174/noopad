@@ -24,7 +24,7 @@ var gulp = require('gulp'),
         'vendor_js':    [
                             'bower_components/angular/angular.js',
                             'bower_components/angular-route/angular-route.js',
-                            'bower_components/ngDropbox/dropbox.js',
+                            'bower_components/angular-dropbox-api/dropbox.js',
                             'bower_components/ng-materialize/dist/ng-materialize.js',
                             'bower_components/angular-animate/angular-animate.js',
                             'bower_components/waves/dist/waves.js',
@@ -111,7 +111,9 @@ gulp.task('reload', function () {
 gulp.task('connect', function() {
     connect.server({
     root: 'dist',
-    livereload: true
+    livereload: {port: 41486},
+    port: 9000,
+    https: true
   });
 });
 

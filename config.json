@@ -1,8 +1,8 @@
 {
   "localhost": {
     "noopadConfig": {
-        "baseUrl": "http://localhost:8080/",
-        "dropboxApiKey": "0v2on491jcvssod"
+        "baseUrl": "https://node1.beta.codenvy.com:41486",
+        "dropboxApiKey": "zc9p9h6a05hnst6"
     }
   },
   "production": {

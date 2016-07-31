@@ -23,14 +23,14 @@
 
             function refresh(message) {
                 $toast.show(message);
-                Dropbox.readdir('/').then(function success(entries) {
-                    vm.files = entries;
+                Dropbox.listFolder('').then(function success(data) {
+                    vm.files = data.entries;
                 });
             }
 
             function getAccount() {
                 Dropbox.accountInfo().then(function (accountInfo) {
-                    refresh('Logged in as ' + accountInfo.display_name);
+                    refresh('Logged in as ' + accountInfo.name.display_name);
                 });
             }
 

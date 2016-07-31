@@ -7,7 +7,7 @@
   "dependencies": {
     "angular": "1.4.7",
     "angular-route": "1.4.7",
-    "ngDropbox": "https://github.com/christiansmith/ngDropbox.git",
+    "angular-dropbox-api": "1.0.1",
     "ng-materialize": "0.1.2",
     "neat": "~1.7.2",
     "bourbon": "~4.2.6",

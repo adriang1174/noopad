@@ -7,7 +7,7 @@
     app.constant('noopadKey', 'noopad.oauth');
 
     app.config(function (DropboxProvider, noopadConfig) {
-        DropboxProvider.config(noopadConfig.dropboxApiKey, noopadConfig.baseUrl + 'callback.html');
+        DropboxProvider.config(noopadConfig.dropboxApiKey, noopadConfig.baseUrl + '/callback.html');
     });
 
     app.config(function ($routeProvider) {
